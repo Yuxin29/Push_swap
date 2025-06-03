@@ -10,14 +10,14 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PUSH_SWAP.H
-#define PUSH_SWAP.H
+#ifndef PUSH_SWAP_H
+# define PUSH_SWAP_H
 
 #include <unistd.h>
 #include <stdlib.h> //for exit and malloc
 #include <fcntl.h> //for read
 
 void	exit(int status);
-ssize_t read(int fd, void *buf, size_t count);
+ssize_t	read(int fd, void *buf, size_t count);
 
 #endif
