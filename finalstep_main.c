@@ -19,16 +19,17 @@ static int	check_input(char **input);
 	int	j;
 
 	i = 0;
-	j = 0;
 	while (input[i])
 	{
+		j = 0;
+		if (input[i][j] == '+' || input[i][j] == '-')
+				j++;
 		while (input[i][j])
 		{
 			if (input[i][j] < '0' || input[i][j] > '9')
 				return (0);
 			j++;
 		}
-		j = 0;
 		i++;
 	}
 	return (1);//input valid
@@ -38,7 +39,8 @@ int	main(int argc, char **argv)
 {
 	int		i;
 	int		*nbrs;
-	char	**process;
+	t_node	nd;
+	t_stack	stk;
 
 	if (argc < 2 || check_input(argv) == 0)
 	{
@@ -47,7 +49,7 @@ int	main(int argc, char **argv)
 	}
 	nbrs = get_nbr_arr(argv);
 	if (!nbrs)
-		return (NULL);
+		return (1);		//error signal
 	process = push_swap(nbrs);
 	while (*process)
 	{
