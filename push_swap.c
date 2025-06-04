@@ -11,34 +11,26 @@
 /* ************************************************************************** */
 
 /*
-✅ Step 4: Implement the push_swap() Function
-This is your main sorting logic function.
+General structure of push_swap():
+- Receive stack A with all numbers. Stack B is empty.
 
-🧠 General structure of push_swap():
-Receive stack A with all numbers. Stack B is empty.
-
-Decide sorting method based on size:
-
+- Decide sorting method based on size:
 2 or 3 elements: handle with simple logic.
-
 4–5 elements: push smallest elements to B, sort 3 in A, push back.
-
 >5 elements: radix sort or chunk-based logic.
 
-🔧 Basic example logic (3 elements):
-c
-Copy
-Edit
+Basic example logic (3 elements):
+
 if (stack_size == 2)
     do sa if needed;
 else if (stack_size == 3)
     use conditionals to sort with sa, ra, rra;
-🔨 For large input:
-Use Radix Sort (binary sorting) or Chunking (divide input into small ranges).
+    
+For large input:
+- Use Radix Sort (binary sorting) or Chunking (divide input into small ranges).
+- Use pb to move unsorted elements to stack B.
+- Use pa to reinsert them correctly sorted.
 
-Use pb to move unsorted elements to stack B.
-
-Use pa to reinsert them correctly sorted.
 */
 
 char **push_swap(int	*nbrs)
