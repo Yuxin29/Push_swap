@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 17:34:15 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/04 20:59:19 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/06 16:07:54 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,10 @@ static int	ft_atoi(char *s)
 	sign = 1;
 	nbr = 0;
 	if (*s == '+' || *s == '-')
+		s++;
+	else if (*s == '-')
 	{
-		if (*s == '-')
-			sign = -1;
+		sign = -1;
 		s++;
 	}
 	while (*s)
@@ -36,9 +37,9 @@ static int	ft_atoi(char *s)
 static int	array_length(char **input)
 {
 	int	i;
-	
+
 	i = 0;
-	while(!input[i])
+	while (!input[i])
 		i++;
 	return (i);
 }
@@ -64,21 +65,19 @@ static int	*get_nbr_arr(char **input)
 
 t_node	*get_node(char **input)
 {
-	int	i;
-	int	length;
-	int	*arr;
+	int		length;
+	int		*arr;
 	t_node *start;
 	t_node	*current;
 	t_node	*new;
-	
-	i = 0;
+
 	length = array_length(input);
 	arr = get_nbr_arr(input);
 	if (!arr)
 		return (NULL);
 	start = NULL;
 	current = NULL;
-	while (i < length)
+	while (length >= 0)
 	{
 		new = malloc(sizeof(t_node));
 		if (!new)
@@ -115,6 +114,6 @@ t_stack	*get_stack(t_node nd)
 		nd = nc->next;
 		i++;
 	}
-	stk-size = i;
+	stk->size = i;
 	return (stk);
 }

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   finalstep_main.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:48:42 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/03 18:09:15 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/06 16:40:03 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ static int	check_input(char **input);
 	{
 		j = 0;
 		if (input[i][j] == '+' || input[i][j] == '-')
-				j++;
+			j++;
 		while (input[i][j])
 		{
 			if (input[i][j] < '0' || input[i][j] > '9')
@@ -39,8 +39,8 @@ int	main(int argc, char **argv)
 {
 	int		i;
 	int		*nbrs;
-	t_node	nd;
-	t_stack	stk;
+	t_node	*nd;
+	t_stack	*stk;
 
 	if (argc < 2 || check_input(argv) == 0)
 	{
@@ -49,7 +49,7 @@ int	main(int argc, char **argv)
 	}
 	nbrs = get_nbr_arr(argv);
 	if (!nbrs)
-		return (1);		//error signal
+		return (1);//error signal
 	process = push_swap(nbrs);
 	while (*process)
 	{

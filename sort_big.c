@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_operations_helpers.c                            :+:      :+:    :+:   */
+/*   sort_big.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/04 21:58:28 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/04 21:59:20 by yuwu             ###   ########.fr       */
+/*   Created: 2025/06/06 16:17:21 by yuwu              #+#    #+#             */
+/*   Updated: 2025/06/06 16:18:20 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-t_node	*new_node(int value);
-
-void	push_top(t_stack *stack, int value);
-
-int	pop_top(t_stack *stack);
-
-void	append_bottom(t_stack *stack, int value); (useful for ra)
-
-int	is_sorted(t_stack *stack); (optional but handy)
-
-void	free_stack(t_stack *stack);
+//no need for null check a, already check
+char	**sort_big(t_node **a, t_node **b)
+{
+	//- Use Radix Sort (binary sorting) or Chunking.
+	//- Use pb to move unsorted elements to stack B.
+	//- Use pa to reinsert them correctly sorted.
+	return (NULL);
+}
