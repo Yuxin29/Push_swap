@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   finalstep_main.c                                   :+:      :+:    :+:   */
+/*   main_process_test.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/03 16:48:42 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/06 16:40:03 by yuwu             ###   ########.fr       */
+/*   Created: 2025/06/06 17:38:12 by yuwu              #+#    #+#             */
+/*   Updated: 2025/06/06 17:43:05 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>  //this printf need to be removed later;
+#include "stdio.h"
 
-static int	check_input(char **input);
+static int	check_input(char **input)
 {
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	while (input[i])
 	{
 		j = 0;
@@ -35,25 +35,32 @@ static int	check_input(char **input);
 	return (1);//input valid
 }
 
+//below are helper functions tested;
+int	array_length(char **input);
+int	*get_nbr_arr(char **input);
+
 int	main(int argc, char **argv)
 {
 	int		i;
+	int		length;
 	int		*nbrs;
-	t_node	*nd;
+	//t_node	*nd;
 
-	if (argc < 2 || check_input(argv) == 0)
-	{
-		write(1, "ERRORS", 6);
-		return (0);
-	}
+	if (check_input(argv) == 0)
+		return (write(1, "INPUT_ERRORS", 12));
+	if (argc < 2)
+		return (write(1, "ERRORS", 6));
+	length = array_length(argv);
+	printf("%s", "length = ");
+	printf("%i\n", length);
+	i = 1;
 	nbrs = get_nbr_arr(argv);
 	if (!nbrs)
 		return (1);//error signal
-	process = push_swap(nbrs);
-	while (*process)
+	while (i <= length)
 	{
-		printf("%s\n", *process);
-		process++;
+		printf("%i\n", nbrs[i]);
+		i++;
 	}
 	return (0);
 }

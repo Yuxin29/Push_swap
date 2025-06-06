@@ -34,17 +34,18 @@ static int	ft_atoi(char *s)
 	return (nbr * sign);
 }
 
-static int	array_length(char **input)
+int	array_length(char **input)
 {
 	int	i;
 
 	i = 0;
-	while (!input[i])
+	while (input[i])
 		i++;
+	i--;
 	return (i);
 }
 
-static int	*get_nbr_arr(char **input)
+int	*get_nbr_arr(char **input)
 {
 	int	i;
 	int	count;
@@ -57,17 +58,17 @@ static int	*get_nbr_arr(char **input)
 		return (0);
 	while (i < count)
 	{
-		array[i] = ft_atoi(input[i])
+		array[i] = ft_atoi(input[i]);
 		i++;
 	}
 	return (array);
 }
 
-t_node	*get_node(char **input)
+t_node	**get_node(char **input)
 {
 	int		length;
 	int		*arr;
-	t_node *start;
+	t_node **start;
 	t_node	*current;
 	t_node	*new;
 
@@ -82,11 +83,11 @@ t_node	*get_node(char **input)
 		new = malloc(sizeof(t_node));
 		if (!new)
 			return (NULL);
-		new->value = arr[i];
+		new->value = *arr;
 		new->next = NULL;
 		if (!start)
 		{
-			start = new;
+			start = &new;
 			current = new;
 		}
 		else
@@ -94,11 +95,12 @@ t_node	*get_node(char **input)
 			current->next = new;
 			current = new;
 		}
-		i++;
+		arr++;
+		length--;
 	}
 	return (start);
 }
-
+/*
 t_stack	*get_stack(t_node nd)
 {
 	t_stack	*stk;
@@ -116,4 +118,4 @@ t_stack	*get_stack(t_node nd)
 	}
 	stk->size = i;
 	return (stk);
-}
+}*/

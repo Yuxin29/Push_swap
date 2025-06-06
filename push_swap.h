@@ -38,8 +38,7 @@ typedef struct s_stack
 
 //below are input dealing functions
 int		*get_nbr_arr(char **input);
-t_node	*get_node(int *arr);
-t_stack	*get_stack(t_node nd);
+t_node	**get_node(char **input);
 
 //operation helpers:
 t_node	*new_node(int value);// helpful for building lists
@@ -50,14 +49,14 @@ void	free_stack(t_node *head);// clean memory
 void	ft_s(t_node **a);
 void	ft_ss(t_node **a, t_node **b);
 void	ft_p(t_node **a, t_node **b);
-void	ft_r(t_noda **a);
-void	ft_rr(t_noda **a);
+void	ft_r(t_node **a);
+void	ft_rr(t_node **a);
 
 //sorting 
 char	**push_swap(int	*nbrs);
 char	**sort_small(t_node	**a, t_node	**b);
 char	**sort_medium(t_node **a, t_node	**b);
-char	**sort_big(t_node **a, t_node	**b)
+char	**sort_big(t_node **a, t_node	**b);
 
 //main
 int		main(int argc, char **argv);
