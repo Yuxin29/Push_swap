@@ -28,24 +28,23 @@ typedef struct s_node
     struct	s_node *next;
 }			t_node;
 
+/*  this stack is probably unnecessary
 typedef struct s_stack
 {
 	t_node	*top;
 	int		size;
 }			t_stack;
+*/ 
 
 //below are input dealing functions
 int		*get_nbr_arr(char **input);
 t_node	*get_node(int *arr);
 t_stack	*get_stack(t_node nd);
 
-//operation helpers: do I actually need them?
-t_node	*new_node(int value);
-void	push_top(t_stack *stack, int value);
-int	pop_top(t_stack *stack);
-void	append_bottom(t_stack *stack, int value);
-int	is_sorted(t_stack *stack);
-void	free_stack(t_stack *stack);
+//operation helpers:
+t_node	*new_node(int value);// helpful for building lists
+int	is_sorted(t_node *head);// useful for checking state
+void	free_stack(t_node *head);// clean memory
 
 //operations
 void	ft_s(t_node **a);
