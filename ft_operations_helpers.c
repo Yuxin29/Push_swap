@@ -25,6 +25,19 @@ t_node	*new_node(int value)
 	return (new);
 }
 
+int get_size(t_node **nd)
+{
+	int		i;
+
+	i = 0;
+	while ((*nd)->next)
+	{
+		*nd = (*nd)->next;
+		i++;
+	}
+	return (i);
+}
+
 //checking sorting status
 int	is_sorted(t_node *head)
 {

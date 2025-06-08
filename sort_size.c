@@ -47,7 +47,28 @@ static int find_smallest_index(t_node **nd)
 	return (min);
 }
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
-void	sort_medium(t_node *a, t_node *b);
+void	sort_medium(t_node **a, t_node **b)
+{
+	int	length;
+	int	min_index;
+
+	length = get_size(a);
+	min_index = find_smallest_index(a);
+	while (length > 3)
+	{
+		min_index = find_smallest_index(a);
+		while (min_index) > 0
+		{
+			ft_r(a, 'a')
+			min_index--;
+		}
+		ft_p(a, b, 'a');
+		length--;
+	}
+	sort_small(a);
+	ft_p(b, a, 'b');
+	ft_p(b, a, 'b');
+}
 
 //according to the length of the linked list, we use different fts.
 void	push_swap(int	*nbrs);

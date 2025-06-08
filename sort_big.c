@@ -14,7 +14,7 @@
 
 char	*sort_big(t_node *a, t_node *b)
 {
-	//- Use Radix Sort (binary sorting) or Chunking.
+	//- Use Radix Sort (binary sorting).
 	//- Use pb to move unsorted elements to stack B.
 	//- Use pa to reinsert them correctly sorted.
 	return (NULL);
