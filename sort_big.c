@@ -12,7 +12,7 @@
 
 //no need for null check a, already checked before calling it.
 
-char	**sort_big(t_node **a, t_node **b)
+char	*sort_big(t_node *a, t_node *b)
 {
 	//- Use Radix Sort (binary sorting) or Chunking.
 	//- Use pb to move unsorted elements to stack B.

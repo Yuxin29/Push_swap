@@ -52,10 +52,10 @@ void	ft_r(t_node **a);
 void	ft_rr(t_node **a);
 
 //sorting 
-char	**push_swap(int	*nbrs);
-char	**sort_small(t_node	**a, t_node	**b);
-char	**sort_medium(t_node **a, t_node	**b);
-char	**sort_big(t_node **a, t_node	**b);
+void	push_swap(int	*nbrs);
+void	sort_small(t_node	*a, t_node	*b);
+void	sort_medium(t_node *a, t_node	*b);
+void	sort_big(t_node *a, t_node	*b);
 
 //main
 int		main(int argc, char **argv);

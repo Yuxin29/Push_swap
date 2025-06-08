@@ -16,20 +16,27 @@ Receive stack A with all numbers. Stack B is empty.
 */
 
 //3 elements: no need to stack B
-char	**sort_small(t_node *a);
+void	sort_small(t_node *a)
 {
-	if 
-
+	if (a->value > a->next->value)
+		ft_s(a);
+	if (a->next->value > a->next->next->value)
+		ft_rr(a);
+	if (a->value > a->next->value)
+		ft_s(a);
+	return ;
 }
 
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
-char	**sort_medium(t_node **a, t_node **b);
+void	sort_medium(t_node *a, t_node *b);
 
 //according to the length of the linked list, we use different fts.
-char	**push_swap(t_node	**a, t_node **b)
+void	push_swap(int	*nbrs);
 {
-	int	num;
+	int		num;
+	t_node	*a;
 
+	a = get_node(nbrs);
 	if (!a || !*a || !(*a)->next)
 		return (NULL);
 	num = get_stack(a)->size;

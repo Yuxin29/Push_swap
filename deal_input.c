@@ -64,21 +64,16 @@ int	*get_nbr_arr(char **input)
 	return (array);
 }
 
-t_node	*get_node(char **input)
+t_node	*get_node(int *arr)
 {
 	int		length;
-	int		*arr;
 	t_node	*start;
 	t_node	*current;
 	t_node	*new;
 
-	length = array_length(input);
-	arr = get_nbr_arr(input);
-	if (!arr)
-		return (NULL);
 	start = NULL;
 	current = NULL;
-	while (length >= 0)
+	while (*arr)
 	{
 		new = malloc(sizeof(t_node));
 		if (!new)
@@ -96,7 +91,6 @@ t_node	*get_node(char **input)
 			current = new;
 		}
 		arr++;
-		length--;
 	}
 	return (start);
 }
