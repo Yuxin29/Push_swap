@@ -12,10 +12,11 @@
 
 #include "push_swap.h"
 
-t_node	*new_node(int value);
+// helpful for building lists
+t_node	*new_node(int value)
 {
 	t_node	*new;
-	
+
 	new = malloc(sizeof(t_node) * 1);
 	if (!new)
 		return (NULL);
@@ -25,21 +26,23 @@ t_node	*new_node(int value);
 }
 
 //checking sorting status
-int	is_sorted(t_node *head);
+int	is_sorted(t_node *head)
 {
-	while (head->next)
+	while (head->next->next)
 	{
-		if (head->value >  head->next->value)
-			return (0);//at least onee case not sorted
+		if (head->value > head->next->value)
+			return (0);
 		head = head->next;
 	}
-	return (1); //all sorted
+	return (1);
 }
-void	free_stack(t_node *head);
+
+// clean memory
+void	free_stack(t_node *head)
 {
-	t_node	tmp;
-	
-	tem = NULL;
+	t_node	*tmp;
+
+	tmp = NULL;
 	while (head->next)
 	{
 		tmp = head;

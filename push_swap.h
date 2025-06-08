@@ -24,26 +24,25 @@
 //below are linked list used
 typedef struct s_node
 {
-    int		value;
-    struct	s_node *next;
-}			t_node;
+    int     value;
+    struct  s_node *next;
+}           t_node;
 
-/*  this stack is probably unnecessary
+//this stack is probably unnecessary
 typedef struct s_stack
 {
-	t_node	*top;
-	int		size;
-}			t_stack;
-*/ 
+	t_node  *top;
+	int     size;
+}           t_stack;
 
 //below are input dealing functions
 int		*get_nbr_arr(char **input);
-t_node	**get_node(char **input);
+t_stack	*get_stack(t_node *nd);
 
 //operation helpers:
-t_node	*new_node(int value);// helpful for building lists
-int	is_sorted(t_node *head);// useful for checking state
-void	free_stack(t_node *head);// clean memory
+t_node	*new_node(int value);
+int     is_sorted(t_node *head);
+void	free_stack(t_node *head);
 
 //operations
 void	ft_s(t_node **a);

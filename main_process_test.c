@@ -38,29 +38,50 @@ static int	check_input(char **input)
 //below are helper functions tested;
 int	array_length(char **input);
 int	*get_nbr_arr(char **input);
+t_node	*get_node(char **input);
+t_stack	*get_stack(t_node *nd);
 
 int	main(int argc, char **argv)
 {
 	int		i;
 	int		length;
 	int		*nbrs;
-	//t_node	*nd;
+	t_node	*nd;
+	t_node	*tmp;
+	t_stack	*stk;
+	int		judge;
 
 	if (check_input(argv) == 0)
 		return (write(1, "INPUT_ERRORS", 12));
 	if (argc < 2)
 		return (write(1, "ERRORS", 6));
+	//testing length
 	length = array_length(argv);
 	printf("%s", "length = ");
 	printf("%i\n", length);
-	i = 1;
+	//testing get_nbr_arr
+	i = 0;
 	nbrs = get_nbr_arr(argv);
 	if (!nbrs)
 		return (1);//error signal
-	while (i <= length)
+	while (i < length)
 	{
 		printf("%i\n", nbrs[i]);
 		i++;
 	}
+	//testing get_node;
+	nd = get_node(argv);
+	tmp = nd;
+	while (tmp->next)
+	{
+		printf("%i\n", tmp->value);
+		tmp = tmp->next;
+	}
+	//test get_stack;
+	stk = get_stack(nd);
+	printf("%i\n", stk->size);
+	//testing helpers;
+	judge = is_sorted(nd);
+	printf("%i\n", judge);
 	return (0);
 }

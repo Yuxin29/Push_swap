@@ -58,17 +58,17 @@ int	*get_nbr_arr(char **input)
 		return (0);
 	while (i < count)
 	{
-		array[i] = ft_atoi(input[i]);
+		array[i] = ft_atoi(input[i + 1]);
 		i++;
 	}
 	return (array);
 }
 
-t_node	**get_node(char **input)
+t_node	*get_node(char **input)
 {
 	int		length;
 	int		*arr;
-	t_node **start;
+	t_node	*start;
 	t_node	*current;
 	t_node	*new;
 
@@ -87,7 +87,7 @@ t_node	**get_node(char **input)
 		new->next = NULL;
 		if (!start)
 		{
-			start = &new;
+			start = new;
 			current = new;
 		}
 		else
@@ -100,8 +100,8 @@ t_node	**get_node(char **input)
 	}
 	return (start);
 }
-/*
-t_stack	*get_stack(t_node nd)
+
+t_stack	*get_stack(t_node *nd)
 {
 	t_stack	*stk;
 	int		i;
@@ -113,9 +113,9 @@ t_stack	*get_stack(t_node nd)
 	i = 0;
 	while (nd->next)
 	{
-		nd = nc->next;
+		nd = nd->next;
 		i++;
 	}
 	stk->size = i;
 	return (stk);
-}*/
+}

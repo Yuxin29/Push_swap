@@ -10,14 +10,22 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-char	**sort_small(t_node **a);
+/*
+in this sort, we do the push&swap and record and return the oprations
+Receive stack A with all numbers. Stack B is empty.
+*/
+
+//3 elements: no need to stack B
+char	**sort_small(t_node *a);
+{
+	if 
+
+}
 
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
 char	**sort_medium(t_node **a, t_node **b);
 
-// in this function, we do the push&swap that we need to do and 
-// record the oprations we did in an array of strs and we return this str;
-// Receive stack A with all numbers. Stack B is empty.
+//according to the length of the linked list, we use different fts.
 char	**push_swap(t_node	**a, t_node **b)
 {
 	int	num;
