@@ -15,93 +15,80 @@
 //print the operation (eg,"sa\n"), return and store it to print later in main().
 
 //swaps: - sa / sb: swap the first two elements
-void	ft_s(t_node **a)
+void	ft_s(t_node **nd, char name)
 {
 	int	tmp;
-	int	n1;
-	int	n2;
 
-	if (!a || !*a || !(*a)->next)
+	if (!nd || !*nd || !(*nd)->next)
 		return ;
-	n1 = a->value;
-	n2 = a->next->value;
-	a->value = n2;
-	a->next->value = n1;
+	tmp = (*nd)->value;
+	(*nd)->value = (*nd)->next->value;
+	(*nd)->next->value = tmp;
 	write (1, "s", 1);
-	write (1, a, 1);
+	write (1, &name, 1);
 	write (1, "\n", 1);
-	return ;
-}
-
-//- ss: sa + sb
-void	ft_ss(t_node **a, t_node **b)
-{
-	if (!a || !*a || !(*a)->next)
-		return ;
-	else if
-		ft_swap(a);
-	if (!b || !*b || !(*b)->next)
-		return ;
-	else if
-		ft_swap(b);
-	return ;
 }
 
 //- pa / pb: push from one stack to the other
-void	ft_p(t_node **a, t_node **b)
+void	ft_p(t_node **dst, t_node **src, char name)
 {
 	t_node	*tmp;
 
-	if (!b || !*b || !(*b)->next)
+	if (!src || !*src)
 		return ;
-	tmp = *b;
-	b->next = *a;
-	b = b->next;
-	write (1, "ra\n", 1);
-	write (1, a, 1);
+	tmp = *src;
+	*src = (*src)->next;
+	tmp->next = *dst;
+	*dst = tmp;
+	write (1, "p", 1);
+	write (1, &name, 1);
 	write (1, "\n", 1);
-	return ;
 }
 
 //- ra / rb: rotate up (first to last)
-void	ft_r(t_noda **a)
+void	ft_r(t_node **nd, char name)
 {
 	t_node	*tmp;
 	t_node	*last;
 
-	if (!a || !*a || !(*a)->next)
+	if (!nd || !*nd || !(*nd)->next)
 		return ;
-	tmp = *a;
+	tmp = *nd;
+	*nd = (*nd)->next;
 	tmp->next = NULL;
-	*a = (*a)->next;
-	last = *a;
-	while (!last->next)
+	last = *nd;
+	while (last->next)
 		last = last->next;
 	last->next = tmp;
-	write (1, "ra\n", 1);
-	write (1, a, 1);
+	write (1, "r", 1);
+	write (1, &name, 1);
 	write (1, "\n", 1);
-	return ;
-}
-
-//- rr: ra + rb
-void	ft_rr(t_noda **a)
-{
-	t_node	*tmp;
-	t_node	*last;
-
-	if (!a || !*a || !(*a)->next)
-		return ;
-	tmp = *a;
-	tmp->next = NULL;
-	*a = (*a)->next;
-	last = *a;
-	while (!last->next)
-		last = last->next;
-	last->next = tmp;
-	write (1, "ra\n", 1);
-	return ;
 }
 
 //- rra / rrb: reverse rotate (last to first)
+void	ft_rr(t_node **nd, char name)
+{
+	t_node	*tmp;
+	t_node	*last;
+
+	if (!nd || !*nd || !(*nd)->next)
+		return ;
+	tmp = NULL;
+	last = *nd;
+	while (last->next)
+	{
+		tmp = last;
+		last = last->next;
+	}
+	tmp->next = NULL;
+	last->next = *nd;
+	*nd = last;
+	write (1, "rr", 2);
+	write (1, &name, 1);
+	write (1, "\n", 1);
+}
+
+//below are thing that dont need to be double defined
+//- ss: sa + sb
+//- rr: ra + rb
 //- rrr: rra + rrb                                                        

@@ -16,17 +16,36 @@ Receive stack A with all numbers. Stack B is empty.
 */
 
 //3 elements: no need to stack B
-void	sort_small(t_node *a)
+void	sort_small(t_node **a)
 {
-	if (a->value > a->next->value)
-		ft_s(a);
-	if (a->next->value > a->next->next->value)
-		ft_rr(a);
-	if (a->value > a->next->value)
-		ft_s(a);
-	return ;
+	if ((*a)->value > (*a)->next->value)
+		ft_s(a, 'a');
+	if ((*a)->next->value > (*a)->next->next->value)
+		ft_s(&((*a)->next), 'a');
+	if ((*a)->value > (*a)->next->value)
+		ft_s(a, 'a');
 }
 
+//helper function for sort_medium
+static int find_smallest_index(t_node **nd)
+{
+	int	min;
+	int	min_ind;
+	int	ind;
+
+	min = (*nd)->value;
+	min_ind = 1;
+	ind = 1
+	while ((*nd)->next)
+	{
+		if ((*nd)->next->value < min)
+			min = (*nd)->next->value;
+			min_ind = ind;
+		ind++;
+		*nd = (*nd)->next->next;
+	}
+	return (min);
+}
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
 void	sort_medium(t_node *a, t_node *b);
 
@@ -46,10 +65,10 @@ void	push_swap(int	*nbrs);
 			return (ft_s(a));
 	}
 	else if (size == 3)
-		return (sort_small(a));
+		sort_small(a));
 	else if (size <= 5 && size >= 4)
-		return (sort_small(a));
+		sort_small(a);
 	else if (size > 5)
-		return (sort_small(a));
+		sort_small(a);
 	return (NULL);
 }
