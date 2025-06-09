@@ -25,24 +25,15 @@
 typedef struct s_node
 {
     int     value;
-    struct  s_node *next;
+    struct  s_node  *next;
 }           t_node;
 
-//this stack is probably unnecessary
-typedef struct s_stack
-{
-	t_node  *top;
-	int     size;
-}           t_stack;
-
 //below are input dealing functions
-int		*get_nbr_arr(char **input);
-t_stack	*get_stack(t_node *nd);
+int     *get_nbr_arr(char **input);
 
 //operation helpers:
-t_node	*new_node(int value);
 int     is_sorted(t_node *head);
-void	free_stack(t_node *head);
+void	free_node(t_node *head);
 
 //operations
 void	ft_s(t_node **a);

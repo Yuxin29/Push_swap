@@ -48,7 +48,6 @@ int	main(int argc, char **argv)
 	int		*nbrs;
 	t_node	*nd;
 	t_node	*tmp;
-	t_stack	*stk;
 	int		judge;
 
 	if (check_input(argv) == 0)
@@ -77,9 +76,6 @@ int	main(int argc, char **argv)
 		printf("%i\n", tmp->value);
 		tmp = tmp->next;
 	}
-	//test get_stack;
-	stk = get_stack(nd);
-	printf("%i\n", stk->size);
 	//testing helpers;
 	judge = is_sorted(nd);
 	printf("%i\n", judge);

@@ -89,6 +89,4 @@ void	ft_rr(t_node **nd, char name)
 }
 
 //below are thing that dont need to be double defined
-//- ss: sa + sb
-//- rr: ra + rb
-//- rrr: rra + rrb                                                        
+//ss: sa + sb; rr: ra + rb; rrr: rra + rrb                                                        

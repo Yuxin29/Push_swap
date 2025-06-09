@@ -94,22 +94,3 @@ t_node	*get_node(int *arr)
 	}
 	return (start);
 }
-
-t_stack	*get_stack(t_node *nd)
-{
-	t_stack	*stk;
-	int		i;
-
-	stk = malloc(sizeof(t_stack) * 1);
-	if (!stk)
-		return (NULL);
-	stk->top = nd;
-	i = 0;
-	while (nd->next)
-	{
-		nd = nd->next;
-		i++;
-	}
-	stk->size = i;
-	return (stk);
-}

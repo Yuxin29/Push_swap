@@ -27,7 +27,7 @@ void	sort_small(t_node **a)
 }
 
 //helper function for sort_medium
-static int find_smallest_index(t_node **nd)
+static int	find_smallest_index(t_node **nd)
 {
 	int	min;
 	int	min_ind;
@@ -35,7 +35,7 @@ static int find_smallest_index(t_node **nd)
 
 	min = (*nd)->value;
 	min_ind = 1;
-	ind = 1
+	ind = 1;
 	while ((*nd)->next)
 	{
 		if ((*nd)->next->value < min)
@@ -46,6 +46,7 @@ static int find_smallest_index(t_node **nd)
 	}
 	return (min);
 }
+
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
 void	sort_medium(t_node **a, t_node **b)
 {
@@ -57,9 +58,9 @@ void	sort_medium(t_node **a, t_node **b)
 	while (length > 3)
 	{
 		min_index = find_smallest_index(a);
-		while (min_index) > 0
+		while (min_index > 0)
 		{
-			ft_r(a, 'a')
+			ft_r(a, 'a');
 			min_index--;
 		}
 		ft_p(a, b, 'a');
@@ -74,7 +75,7 @@ void	sort_medium(t_node **a, t_node **b)
 void	push_swap(int	*nbrs);
 {
 	int		num;
-	t_node	*a;
+	t_node	**a;
 
 	a = get_node(nbrs);
 	if (!a || !*a || !(*a)->next)
@@ -88,8 +89,7 @@ void	push_swap(int	*nbrs);
 	else if (size == 3)
 		sort_small(a));
 	else if (size <= 5 && size >= 4)
-		sort_small(a);
+		sort_medium(a);
 	else if (size > 5)
-		sort_small(a);
-	return (NULL);
+		sort_big(a);
 }
