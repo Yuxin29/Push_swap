@@ -34,17 +34,6 @@ static int	ft_atoi(char *s)
 	return (nbr * sign);
 }
 
-int	array_length(char **input)
-{
-	int	i;
-
-	i = 0;
-	while (input[i])
-		i++;
-	i--;
-	return (i);
-}
-
 int	*get_nbr_arr(char **input)
 {
 	int	i;

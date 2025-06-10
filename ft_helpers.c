@@ -39,6 +39,20 @@ void	free_stack(t_node *head)
 	return ;
 }
 
+int	find_min(t_node **a)
+{
+	int		min;
+
+	min = (*a)->value;
+	while (*a)
+	{
+		if ((*a)->value < min)
+			min = (*a)->value;
+		(*a) = (*a)->next;
+	}
+    return (min);
+}
+
 int	node_size(t_node **nd)
 {
 	int	size;

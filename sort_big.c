@@ -39,29 +39,41 @@ static int	max_bits(t_node **a)
     return (bits);
 }
 
-//below handles positive numbers fist
+//below handles minus numbers
+int	dealing_minus(t_node **a)
+{
+	int	off_set;
+	int	min;
+
+	off_set = 0;
+	min = find_min(a);
+	if (min < 0)
+		off_set = -min;
+	return (off_set);
+}
+
 void	sort_big(t_node **a, t_node **b)
 {
 	int	max_bits;
 	int i;
-	int	j;
 	int	size;
 	int	value;
+	int	off_set;
 
 	max_bits = max_bits(a);
 	i = 0;
-	size = node_size(*a)
+	off_set = dealing_minus(a);
 	while (i < max_bits)
 	{
-		j = 0;
-		while (j < size)
+		size = node_size(*a)
+		while (size)
 		{
-			value = (*a)->value;
+			value = (*a)->value + off_set;
 			if ((value >> i) & 1)
         		ft_r(a);
 			else
 				ft_p(a, b);
-			j++;
+			size--;
 		}
 		while (*b)
 			ft_p(b, a);
