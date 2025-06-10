@@ -6,61 +6,64 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:37:58 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/06 16:41:16 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/10 19:32:11 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+/*  -------------------------Steps---------------------------
+- Dealing with input and change them into Stack Structure:
+- Implement Basic Stack Operations: sa, sb, pa, pb, ra, etc.
+- sorting start, method according to list size:
+	-> 2
+	-> 3
+	-> 4-5
+	-> more than 5
+- main: input error check first, **argv change to **t_node, then call push_swap
+-------------------------------------------------------
+for exit and malloc: <stdlib.h>
+void	exit(int status);
+for read: <fcntl.h>
+ssize_t  read(int fd, void *buf, size_t count);
+------------------------------------
+*/
 
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include <unistd.h>
-#include <stdlib.h>//for exit and malloc
-#include <fcntl.h>//for read
+#include<unistd.h>
+#include<stdlib.h>
+#include<fcntl.h>
 
-// below are initiating and read fcs, included and can used directly
-// void	exit(int status);
-// ssize_t	read(int fd, void *buf, size_t count);
-
-//below are linked list used
+//self_defined data structure: linked list
 typedef struct s_node
 {
-    int     value;
-    struct  s_node  *next;
-}           t_node;
+	int		value;
+	struct s_node	*next;
+}			t_node;
 
 //below are input dealing functions
-int     *get_nbr_arr(char **input);
+int	*get_nbr_arr(char **input);
+t_node	*get_node(int *arr);
 
-//operation helpers:
+//operation helpers: not used yet
+/*
 int     is_sorted(t_node *head);
 void	free_node(t_node *head);
+*/
 
 //operations
-void	ft_s(t_node **a);
-void	ft_ss(t_node **a, t_node **b);
-void	ft_p(t_node **a, t_node **b);
-void	ft_r(t_node **a);
-void	ft_rr(t_node **a);
+void	ft_s(t_node **a, char name);
+void	ft_p(t_node **dst, t_node **src, char name_sr);
+void	ft_r(t_node **a, char name);
+void	ft_rr(t_node **a, char name);
 
 //sorting 
-void	push_swap(int	*nbrs);
-void	sort_small(t_node	*a, t_node	*b);
+void	push_swap(int *nbrs);
+void	sort_small(t_node *a, t_node *b);
 void	sort_medium(t_node *a, t_node	*b);
-void	sort_big(t_node *a, t_node	*b);
+void	sort_big(t_node *a, t_node *b);
 
 //main
-int		main(int argc, char **argv);
+int	main(int argc, char **argv);
 
 #endif
-
-/*  -------------------------Steps---------------------------
-- Dealing with input and change them into Stack Structure:
-- Implement Basic Stack Ops:
-helpers: some helpers
-The actual operatison: sa, sb, pa, pb, ra, etc. — building blocks of push_swap.
-- Then Implement push_swap(I DONT KNOW ABOUT HOW TO SORT YET):
-Start with simple cases (e.g., 2 or 3 numbers).
-Scale up gradually (use radix sort for big input sets if allowed).
--main
-I do my input check in main, change my input to stacks and call push swap in main
-*/

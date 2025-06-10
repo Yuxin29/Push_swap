@@ -55,7 +55,6 @@ int	*get_nbr_arr(char **input)
 
 t_node	*get_node(int *arr)
 {
-	int		length;
 	t_node	*start;
 	t_node	*current;
 	t_node	*new;
