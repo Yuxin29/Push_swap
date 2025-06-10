@@ -30,9 +30,9 @@ ssize_t  read(int fd, void *buf, size_t count);
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-#include<unistd.h>
-#include<stdlib.h>
-#include<fcntl.h>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fcntl.h>
 
 //self_defined data structure: linked list
 typedef struct s_node
@@ -42,7 +42,7 @@ typedef struct s_node
 }			t_node;
 
 //below are input dealing functions
-void	free_stack(t_node **head)
+void	free_stack(t_node **start);
 int	*get_nbr_arr(char **input);
 t_node	*get_node(int *arr);
 

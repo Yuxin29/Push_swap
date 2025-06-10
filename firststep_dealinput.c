@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-//INT_MAX, INT_MIN not dealt with yet
+//INT_MAX, INT_MIN not dealt with yet, I will probaly deal them in main
 static int	ft_atoi(char *s)
 {
 	int	sign;
@@ -36,14 +36,14 @@ static int	ft_atoi(char *s)
 }
 
 //in case if getting **t_node fails
-static void	free_stack(t_node **head)
+void	free_stack(t_node **start)
 {
 	t_node	*tmp;
 
-	while (*head)
+	while (*start)
 	{
-		tmp = *head;
-		*head = (*head)->next;
+		tmp = *start;
+		*start = (*start)->next;
 		free (tmp);
 	}
 }
@@ -97,4 +97,19 @@ t_node	**get_node(int *arr)
 		arr++;
 	}
 	return (start);
+}
+
+int	node_size(t_node **nd)
+{
+	int	size;
+
+	size = 0;
+	if (!nd || !(*nd))
+		return (0);
+	while (*nd)
+	{
+		size++;
+		*nd = (*nd)->next;
+	}
+	return (size);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   sort_size.c                                        :+:      :+:    :+:   */
+/*   push_swap_by_size.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -52,8 +52,10 @@ static int	find_smallest_index(t_node **nd)
 	while ((*nd)->next)
 	{
 		if ((*nd)->next->value < min)
+		{
 			min = (*nd)->next->value;
 			min_ind = ind;
+		}
 		ind++;
 		*nd = (*nd)->next->next;
 	}
@@ -85,19 +87,19 @@ void	sort_medium(t_node **a, t_node **b)
 }
 
 //according to the length of the linked list, we use different fts.
-void	push_swap(int	*nbrs);
+void	push_swap_by_size(t_node **a)
 {
-	int		num;
-	t_node	**a;
+	int	num;
 
-	a = get_node(nbrs);
 	if (!a || !*a || !(*a)->next)
 		return (NULL);
-	num = get_stack(a)->size;
+	num = node_size(a);
 	if (size == 2)
 	{
 		if (node->value > node->next->value)
-			return (ft_s(a));
+			(ft_s(a, 'a'));
+		else
+			return;
 	}
 	else if (size == 3)
 		sort_small(a));

@@ -12,7 +12,10 @@
 
 #include "push_swap.h"
 
-//print the operation (eg,"sa\n"), return and store it to print later in main().
+/*
+print the operation (eg,"sa\n"), return and store it to print later in main()
+ss: sa + sb; rr: ra + rb; rrr: rra + rrb    
+*/
 
 //swaps: - sa / sb: swap the first two elements
 void	ft_s(t_node **nd, char name)
@@ -86,7 +89,4 @@ void	ft_rr(t_node **nd, char name)
 	write (1, "rr", 2);
 	write (1, &name, 1);
 	write (1, "\n", 1);
-}
-
-//below are thing that dont need to be double defined
-//ss: sa + sb; rr: ra + rb; rrr: rra + rrb                                                        
+}                               

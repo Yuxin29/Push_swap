@@ -37,9 +37,9 @@ static int	check_input(char **input);
 
 int	main(int argc, char **argv)
 {
-	int		i;
-	int		*nbrs;
-	t_node	*nd;
+	int	i;
+	int	*nbrs;
+	t_node	**nd;
 
 	if (argc < 2 || check_input(argv) == 0)
 	{
@@ -49,11 +49,7 @@ int	main(int argc, char **argv)
 	nbrs = get_nbr_arr(argv);
 	if (!nbrs)
 		return (1);//error signal
-	process = push_swap(nbrs);
-	while (*process)
-	{
-		printf("%s\n", *process);
-		process++;
-	}
+	nd = get_node(nbrs);
+	push_swap_by_size(nd);
 	return (0);
 }

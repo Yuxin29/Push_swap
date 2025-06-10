@@ -17,8 +17,8 @@ value >> i shifts the bits of value to the right by i places.
 
 static int	max_bits(t_node **a)
 {
-	int	bits;
-	int	max;
+	int		bits;
+	int		max;
 	t_node	*tmp;
 
 	tmp = *a;
@@ -30,7 +30,7 @@ static int	max_bits(t_node **a)
 		tmp = tmp->next;
 	}
 	bits = 0;
-    	while (max > 0)
+	while (max > 0)
 	{
 		max /= 2;
 		bits++;
@@ -56,21 +56,6 @@ static int	dealing_minus(t_node **a)
 	return (off_set);
 }
 
-static int	node_size(t_node **nd)
-{
-	int	size;
-
-	size = 0;
-	if (!nd || !(*nd))
-		return (0);
-	while (*nd)
-	{
-		size++;
-		*nd = (*nd)->next;
-	}
-	return (size);
-}
-
 void	sort_big(t_node **a, t_node **b)
 {
 	int	max_bits;
@@ -84,12 +69,12 @@ void	sort_big(t_node **a, t_node **b)
 	off_set = dealing_minus(a);
 	while (i < max_bits)
 	{
-		size = node_size(*a)
+		size = node_size(*a);
 		while (size)
 		{
 			value = (*a)->value + off_set;
 			if ((value >> i) & 1)
-        			ft_r(a);
+				ft_r(a);
 			else
 				ft_p(a, b);
 			size--;
