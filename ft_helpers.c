@@ -38,3 +38,18 @@ void	free_stack(t_node *head)
 	}
 	return ;
 }
+
+int	node_size(t_node **nd)
+{
+	int	size;
+
+	size = 0;
+	if (!nd || !(*nd))
+		return (0);
+	while (*nd)
+	{
+		size++;
+		*nd = (*nd)->next;
+	}
+	return (size);
+}

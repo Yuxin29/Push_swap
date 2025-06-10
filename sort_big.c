@@ -10,21 +10,25 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-//no need for null check a, already checked before calling it.
+/*------------------the only new thing used here------------------
+value >> i shifts the bits of value to the right by i places.
+& 1 isolates the least significant bit after shifting.
+*/
 
+//no need for null check a, already checked before calling it.
 static int	max_bits(t_node **a)
 {
 	int		bits;
 	int		max;
-	t_node *tmp;
+	t_node	*tmp;
 
-	*tmp = *a;
-	max = (*tmp)->value;
-	while ((*tmp)->next)
+	tmp = *a;
+	max = tmp->value;
+	while (tmp)
 	{
-		if ((*tmp)->next->value > max)
-			max = (*tmp)->next->value;
-		*tmp = (*tmp)->next;
+		if (tmp->value > max)
+			max = tmp->value;
+		tmp = tmp->next;
 	}
 	bits = 0;
     while (max > 0)
@@ -32,30 +36,35 @@ static int	max_bits(t_node **a)
         max /= 2;
         bits++;
     }
-    return bits;
+    return (bits);
 }
 
 //below handles positive numbers fist
-char	*sort_big(t_node **a, t_node **b)
+void	sort_big(t_node **a, t_node **b)
 {
-	int	max;
 	int	max_bits;
-	int n;
+	int i;
+	int	j;
+	int	size;
 	int	value;
 
 	max_bits = max_bits(a);
 	i = 0;
-	while (i <= max_bits)
+	size = node_size(*a)
+	while (i < max_bits)
 	{
-		while (*a)
+		j = 0;
+		while (j < size)
 		{
 			value = (*a)->value;
 			if ((value >> i) & 1)
-        		ft_p(a, b);
-			else
         		ft_r(a);
+			else
+				ft_p(a, b);
+			j++;
 		}
-		(*a) = (*a)->next;
+		while (*b)
+			ft_p(b, a);
 		i++;
 	}
 }
