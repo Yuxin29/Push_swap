@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:37:58 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/10 19:32:11 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/10 20:21:10 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,14 +42,12 @@ typedef struct s_node
 }			t_node;
 
 //below are input dealing functions
+void	free_stack(t_node **head)
 int	*get_nbr_arr(char **input);
 t_node	*get_node(int *arr);
 
 //operation helpers: not used yet
-/*
-int     is_sorted(t_node *head);
-void	free_node(t_node *head);
-*/
+//int     is_sorted(t_node *head);
 
 //operations
 void	ft_s(t_node **a, char name);

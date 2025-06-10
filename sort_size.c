@@ -6,13 +6,26 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:09:47 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/04 20:57:51 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/10 20:25:23 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 /*
 in this sort, we do the push&swap and record and return the oprations
 Receive stack A with all numbers. Stack B is empty.
+*/
+
+/* this is a helper probably needed
+int	is_sorted(t_node **head)
+{
+	while ((*head)->next->next)
+	{
+		if ((*head)->value > (*head)->next->value)
+			return (0);
+		(*head) = (*head)->next;
+	}
+	return (1);
+}
 */
 
 //3 elements: no need to stack B

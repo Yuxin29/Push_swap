@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deal_input.c                                       :+:      :+:    :+:   */
+/*   firststep_dealinput.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,6 +12,7 @@
 
 #include "push_swap.h"
 
+//INT_MAX, INT_MIN not dealt with yet
 static int	ft_atoi(char *s)
 {
 	int	sign;
@@ -19,7 +20,7 @@ static int	ft_atoi(char *s)
 
 	sign = 1;
 	nbr = 0;
-	if (*s == '+' || *s == '-')
+	if (*s == '+')
 		s++;
 	else if (*s == '-')
 	{
@@ -34,17 +35,32 @@ static int	ft_atoi(char *s)
 	return (nbr * sign);
 }
 
+//in case if getting **t_node fails
+static void	free_stack(t_node **head)
+{
+	t_node	*tmp;
+
+	while (*head)
+	{
+		tmp = *head;
+		*head = (*head)->next;
+		free (tmp);
+	}
+}
+
 int	*get_nbr_arr(char **input)
 {
 	int	i;
 	int	count;
 	int	*array;
 
-	i = 0;
-	count = array_length(input);
+	count = 0;
+	while (input[count + 1])
+		count++;
 	array = malloc(sizeof(int) * count);
 	if (!array)
 		return (0);
+	i = 0;
 	while (i < count)
 	{
 		array[i] = ft_atoi(input[i + 1]);
@@ -53,31 +69,31 @@ int	*get_nbr_arr(char **input)
 	return (array);
 }
 
-t_node	*get_node(int *arr)
+//potential issue here is when *arr == 0, need ints: index i and size
+t_node	**get_node(int *arr)
 {
-	t_node	*start;
+	t_node	**start;
 	t_node	*current;
 	t_node	*new;
 
-	start = NULL;
+	if (!arr)
+		return (NULL);
+	start = malloc(sizeof(t_node *));
+	if (!start)
+		return (NULL);
 	current = NULL;
 	while (*arr)
 	{
-		new = malloc(sizeof(t_node));
+		new = malloc(sizeof(t_node) * 1);
 		if (!new)
-			return (NULL);
+			return (free(start), NULL);
 		new->value = *arr;
 		new->next = NULL;
-		if (!start)
-		{
-			start = new;
-			current = new;
-		}
+		if (!*start)
+			*start = new;
 		else
-		{
 			current->next = new;
-			current = new;
-		}
+		current = new;
 		arr++;
 	}
 	return (start);
