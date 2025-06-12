@@ -33,7 +33,7 @@ void	ft_s(t_node **nd, char name)
 }
 
 //- pa / pb: push from one stack to the other
-void	ft_p(t_node **dst, t_node **src, char name_src)
+void	ft_p(t_node **dst, t_node **src, char name_dst)
 {
 	t_node	*tmp;
 
@@ -44,7 +44,7 @@ void	ft_p(t_node **dst, t_node **src, char name_src)
 	tmp->next = *dst;
 	*dst = tmp;
 	write (1, "p", 1);
-	write (1, &name, 1);
+	write (1, &name_dst, 1);
 	write (1, "\n", 1);
 }
 
@@ -89,4 +89,4 @@ void	ft_rr(t_node **nd, char name)
 	write (1, "rr", 2);
 	write (1, &name, 1);
 	write (1, "\n", 1);
-}                               
+}

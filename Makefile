@@ -15,9 +15,11 @@ HEADERS := push_swap.h
 CFLAGS := -Wall -Wextra -Werror
 CC := cc
 
-SRCS := ft_printf.c \
-		ft_putchar.c \
-# to be updated later
+SRCS := firststep_dealinput.c \
+	ft_operations.c \
+	push_swap_by_size.c \
+	sort_big.c \
+	finalstep_main.c \
 
 OBJS := $(SRCS:%.c=%.o)
 

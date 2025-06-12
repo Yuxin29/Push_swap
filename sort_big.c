@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
 /*------------------the only new thing used here------------------
 value >> i shifts the bits of value to the right by i places.
 & 1 isolates the least significant bit after shifting.
@@ -56,31 +58,33 @@ static int	dealing_minus(t_node **a)
 	return (off_set);
 }
 
-void	sort_big(t_node **a, t_node **b)
+void	sort_big(t_node **a)
 {
-	int	max_bits;
+	t_node	**b = NULL;
+	int	max_bit;
 	int	i;
 	int	size;
 	int	value;
 	int	off_set;
 
-	max_bits = max_bits(a);
+	//*b = NULL;
+	max_bit = max_bits(a);
 	i = 0;
 	off_set = dealing_minus(a);
-	while (i < max_bits)
+	while (i < max_bit)
 	{
-		size = node_size(*a);
+		size = node_size(a);
 		while (size)
 		{
 			value = (*a)->value + off_set;
 			if ((value >> i) & 1)
-				ft_r(a);
+				ft_r(a, 'a');
 			else
-				ft_p(a, b);
+				ft_p(b, a, 'b');
 			size--;
 		}
 		while (*b)
-			ft_p(b, a);
+			ft_p(a, b, 'a');
 		i++;
 	}
 }

@@ -10,22 +10,11 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "push_swap.h"
+
 /*
 in this sort, we do the push&swap and record and return the oprations
 Receive stack A with all numbers. Stack B is empty.
-*/
-
-/* this is a helper probably needed
-int	is_sorted(t_node **head)
-{
-	while ((*head)->next->next)
-	{
-		if ((*head)->value > (*head)->next->value)
-			return (0);
-		(*head) = (*head)->next;
-	}
-	return (1);
-}
 */
 
 //3 elements: no need to stack B
@@ -59,16 +48,18 @@ static int	find_smallest_index(t_node **nd)
 		ind++;
 		*nd = (*nd)->next->next;
 	}
-	return (min);
+	return (min_ind);
 }
 
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
-void	sort_medium(t_node **a, t_node **b)
+void	sort_medium(t_node **a)
 {
 	int	length;
 	int	min_index;
-
-	length = get_size(a);
+	t_node	**b = NULL;
+	
+	//*b = NULL;
+	length = node_size(a);
 	min_index = find_smallest_index(a);
 	while (length > 3)
 	{
@@ -89,20 +80,20 @@ void	sort_medium(t_node **a, t_node **b)
 //according to the length of the linked list, we use different fts.
 void	push_swap_by_size(t_node **a)
 {
-	int	num;
+	int	size;
 
 	if (!a || !*a || !(*a)->next)
-		return (NULL);
-	num = node_size(a);
+		return ;
+	size = node_size(a);
 	if (size == 2)
 	{
-		if (node->value > node->next->value)
+		if ((*a)->value > (*a)->next->value)
 			(ft_s(a, 'a'));
 		else
-			return;
+			return ;
 	}
 	else if (size == 3)
-		sort_small(a));
+		sort_small(a);
 	else if (size <= 5 && size >= 4)
 		sort_medium(a);
 	else if (size > 5)

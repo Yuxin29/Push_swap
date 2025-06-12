@@ -13,12 +13,12 @@
 #include "push_swap.h"
 #include <stdio.h>  //this printf need to be removed later;
 
-static int	check_input(char **input);
+static int	check_input(char **input)
 {
 	int	i;
 	int	j;
 
-	i = 0;
+	i = 1;
 	while (input[i])
 	{
 		j = 0;
@@ -37,8 +37,7 @@ static int	check_input(char **input);
 
 int	main(int argc, char **argv)
 {
-	int	i;
-	int	*nbrs;
+	int		*nbrs;
 	t_node	**nd;
 
 	if (argc < 2 || check_input(argv) == 0)
@@ -48,8 +47,13 @@ int	main(int argc, char **argv)
 	}
 	nbrs = get_nbr_arr(argv);
 	if (!nbrs)
-		return (1);//error signal
+		return (1);
 	nd = get_node(nbrs);
-	push_swap_by_size(nd);
+	while ((*nd)->next)
+	{
+		printf("%i\n", (*nd)->value);
+		(*nd) = (*nd)->next;
+	}
+	//push_swap_by_size(nd);  I have seg fault at this step
 	return (0);
 }

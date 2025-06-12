@@ -37,29 +37,30 @@ ssize_t  read(int fd, void *buf, size_t count);
 //self_defined data structure: linked list
 typedef struct s_node
 {
-	int		value;
+	int				value;
 	struct s_node	*next;
-}			t_node;
+}					t_node;
 
 //below are input dealing functions
 void	free_stack(t_node **start);
 int	*get_nbr_arr(char **input);
-t_node	*get_node(int *arr);
+t_node	**get_node(int *arr);
+int	node_size(t_node **nd);
 
 //operation helpers: not used yet
 //int     is_sorted(t_node *head);
 
 //operations
 void	ft_s(t_node **a, char name);
-void	ft_p(t_node **dst, t_node **src, char name_sr);
+void	ft_p(t_node **dst, t_node **src, char name_dst);
 void	ft_r(t_node **a, char name);
 void	ft_rr(t_node **a, char name);
 
 //sorting 
-void	push_swap(int *nbrs);
-void	sort_small(t_node *a, t_node *b);
-void	sort_medium(t_node *a, t_node	*b);
-void	sort_big(t_node *a, t_node *b);
+void	push_swap_by_size(t_node **a);
+void	sort_small(t_node **a);
+void	sort_medium(t_node **a);
+void	sort_big(t_node **a);
 
 //main
 int	main(int argc, char **argv);
