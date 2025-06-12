@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:09:47 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/10 20:25:23 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/12 15:59:34 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,11 +54,14 @@ static int	find_smallest_index(t_node **nd)
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
 void	sort_medium(t_node **a)
 {
-	int	length;
-	int	min_index;
-	t_node	**b = NULL;
-	
-	//*b = NULL;
+	int		length;
+	int		min_index;
+	t_node	**b;
+
+	b = malloc(sizeof(t_node *));
+	if (!b)
+		return ;
+	*b = NULL;
 	length = node_size(a);
 	min_index = find_smallest_index(a);
 	while (length > 3)
@@ -77,7 +80,6 @@ void	sort_medium(t_node **a)
 	ft_p(b, a, 'b');
 }
 
-//according to the length of the linked list, we use different fts.
 void	push_swap_by_size(t_node **a)
 {
 	int	size;

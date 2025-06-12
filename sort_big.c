@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:17:21 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/06 16:18:20 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/12 15:56:10 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,18 @@ static int	max_bits(t_node **a)
 
 static int	dealing_minus(t_node **a)
 {
-	int	off_set;
-	int	min;
+	int		off_set;
+	int		min;
+	t_node	*tmp;
 
 	off_set = 0;
-	min = (*a)->value;
-	while (*a)
+	tmp = *a;
+	min = tmp->value;
+	while (tmp)
 	{
-		if ((*a)->value < min)
-			min = (*a)->value;
-		(*a) = (*a)->next;
+		if (tmp->value < min)
+			min = tmp->value;
+		tmp = tmp->next;
 	}
 	if (min < 0)
 		off_set = -min;
@@ -60,17 +62,20 @@ static int	dealing_minus(t_node **a)
 
 void	sort_big(t_node **a)
 {
-	t_node	**b = NULL;
-	int	max_bit;
-	int	i;
-	int	size;
-	int	value;
-	int	off_set;
+	t_node	**b;
+	int		max_bit;
+	int		i;
+	int		size;
+	int		value;
+	int		off_set;
 
-	//*b = NULL;
 	max_bit = max_bits(a);
 	i = 0;
 	off_set = dealing_minus(a);
+	b = malloc(sizeof(t_node *));
+	if (!b)
+		return ;
+	*b = NULL;
 	while (i < max_bit)
 	{
 		size = node_size(a);

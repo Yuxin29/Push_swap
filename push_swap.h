@@ -39,16 +39,20 @@ typedef struct s_node
 {
 	int				value;
 	struct s_node	*next;
-}					t_node;
+}		t_node;
+
+typedef struct s_stack
+{
+	int	*arr;
+	int 	size;
+}		t_stack;
 
 //below are input dealing functions
+long	ft_atoi(char *s);
 void	free_stack(t_node **start);
-int	*get_nbr_arr(char **input);
-t_node	**get_node(int *arr);
+t_stack	*get_nbr_stack(char **input);
+t_node	**get_node(t_stack *stk);
 int	node_size(t_node **nd);
-
-//operation helpers: not used yet
-//int     is_sorted(t_node *head);
 
 //operations
 void	ft_s(t_node **a, char name);

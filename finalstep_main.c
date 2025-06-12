@@ -11,49 +11,52 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <stdio.h>  //this printf need to be removed later;
+#include <unistd.h>
+#include <limits.h>
 
 static int	check_input(char **input)
 {
 	int	i;
-	int	j;
+	int	check;
 
 	i = 1;
 	while (input[i])
 	{
-		j = 0;
-		if (input[i][j] == '+' || input[i][j] == '-')
-			j++;
-		while (input[i][j])
-		{
-			if (input[i][j] < '0' || input[i][j] > '9')
-				return (0);
-			j++;
-		}
+		check = ft_atoi(input[i]);
+		if (check > INT_MAX || check < INT_MIN || check == 0)
+			return (0);
 		i++;
 	}
-	return (1);//input valid
+	return (1);
 }
 
 int	main(int argc, char **argv)
 {
-	int		*nbrs;
+	t_stack	*stk;
 	t_node	**nd;
 
-	if (argc < 2 || check_input(argv) == 0)
+	if (argc < 3)
 	{
-		write(1, "ERRORS", 6);
-		return (0);
-	}
-	nbrs = get_nbr_arr(argv);
-	if (!nbrs)
+		write(2, "Error\n", 6);
 		return (1);
-	nd = get_node(nbrs);
-	while ((*nd)->next)
-	{
-		printf("%i\n", (*nd)->value);
-		(*nd) = (*nd)->next;
 	}
-	//push_swap_by_size(nd);  I have seg fault at this step
+	if (check_input(argv) == 0)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	stk = get_nbr_stack(argv);
+	if (!stk)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	nd = get_node(stk);
+	if (!nd)
+	{
+		write(2, "Error\n", 6);
+		return (1);
+	}
+	push_swap_by_size(nd);
 	return (0);
 }
