@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:09:47 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/12 16:25:53 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/12 18:35:38 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,9 @@ void	sort_small(t_node **a)
 //helper function for sort_medium
 static int	find_smallest_index(t_node **nd)
 {
-	int	min;
-	int	min_ind;
-	int	ind;
+	int		min;
+	int		min_ind;
+	int		ind;
 	t_node	*tmp;
 
 	min = (*nd)->value;

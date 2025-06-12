@@ -12,6 +12,28 @@
 
 #include "push_swap.h"
 
+long	ft_atoi(char *s)
+{
+	int		sign;
+	long	nbr;
+
+	sign = 1;
+	nbr = 0;
+	if (*s == '+')
+		s++;
+	else if (*s == '-')
+	{
+		sign = -1;
+		s++;
+	}
+	while (*s)
+	{
+		nbr = nbr * 10 + (*s - '0');
+		s++;
+	}
+	return (nbr * sign);
+}
+
 t_stack	*get_nbr_stack(char **input)
 {
 	int		i;

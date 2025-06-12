@@ -14,44 +14,49 @@
 #include <unistd.h>
 #include <limits.h>
 
-long	ft_atoi(char *s)
-{
-	int		sign;
-	long	nbr;
-
-	sign = 1;
-	nbr = 0;
-	if (*s == '0')
-		return (nbr * sign);
-	if (*s == '+')
-		s++;
-	else if (*s == '-')
-	{
-		sign = -1;
-		s++;
-	}
-	while (*s)
-	{
-		if (*s < '0' || *s > '9')
-			return (0);
-		nbr = nbr * 10 + (*s - '0');
-		s++;
-	}
-	return (nbr * sign);
-}
-
-static int	check_input(char **input)
+static int	check_is_digit(char **input)
 {
 	int	i;
-	int	check;
+	int	j;
 
 	i = 1;
 	while (input[i])
 	{
-		check = ft_atoi(input[i]);
-		if (check > INT_MAX || check < INT_MIN || check == 0)
-			return (0);
+		j = 0;
+		if {input[i][j] == '+' || input[i][j] == '-'}
+			j++;
+		while (input[i][j])
+		{
+			if {input[i][j] < '0' || input[i][j] > '9'}
+				return (0);
+			j++;
+		}
 		i++;
+	}
+	return (1);
+}
+
+static int	check_dup(char **input);
+{
+	while (*input)
+	{
+		if ()
+			return (0);
+		input++;
+	}
+	return (1);
+}
+
+static int	check_max_min(char **input)
+{
+	long	value;
+
+	while (*input)
+	{
+		value = ft_atoi(*input);
+		if (value < INT_MIN || VALUE > INT_MAX)
+			return (0);
+		input++;
 	}
 	return (1);
 }
@@ -66,7 +71,7 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		return (1);
 	}
-	if (check_input(argv) == 0)
+	if (!check_is_digit(argv) || !check_dup(argv) || !check_max_min(argv))
 	{
 		write(2, "Error\n", 6);
 		return (1);
