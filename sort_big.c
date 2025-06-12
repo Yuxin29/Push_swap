@@ -60,29 +60,22 @@ static int	dealing_minus(t_node **a)
 	return (off_set);
 }
 
-void	sort_big(t_node **a)
+void	sort_big(t_node **a, t_node **b)
 {
-	t_node	**b;
 	int		max_bit;
 	int		i;
 	int		size;
-	int		value;
 	int		off_set;
 
-	max_bit = max_bits(a);
 	i = 0;
+	max_bit = max_bits(a);
 	off_set = dealing_minus(a);
-	b = malloc(sizeof(t_node *));
-	if (!b)
-		return ;
-	*b = NULL;
 	while (i < max_bit)
 	{
 		size = node_size(a);
 		while (size)
 		{
-			value = (*a)->value + off_set;
-			if ((value >> i) & 1)
+			if ((((*a)->value + off_set) >> i) & 1)
 				ft_r(a, 'a');
 			else
 				ft_p(b, a, 'b');

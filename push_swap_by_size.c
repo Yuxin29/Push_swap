@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 18:09:47 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/12 15:59:34 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/12 16:25:53 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	sort_small(t_node **a)
 	if ((*a)->value > (*a)->next->value)
 		ft_s(a, 'a');
 	if ((*a)->next->value > (*a)->next->next->value)
-		ft_s(&((*a)->next), 'a');
+		ft_rr(a, 'a');
 	if ((*a)->value > (*a)->next->value)
 		ft_s(a, 'a');
 }
@@ -34,34 +34,31 @@ static int	find_smallest_index(t_node **nd)
 	int	min;
 	int	min_ind;
 	int	ind;
+	t_node	*tmp;
 
 	min = (*nd)->value;
 	min_ind = 1;
 	ind = 1;
-	while ((*nd)->next)
+	tmp = *nd;
+	while (tmp)
 	{
-		if ((*nd)->next->value < min)
+		if (tmp->value < min)
 		{
-			min = (*nd)->next->value;
+			min = tmp->value;
 			min_ind = ind;
 		}
 		ind++;
-		*nd = (*nd)->next->next;
+		tmp = (tmp)->next;
 	}
 	return (min_ind);
 }
 
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
-void	sort_medium(t_node **a)
+void	sort_medium(t_node **a, t_node **b)
 {
-	int		length;
-	int		min_index;
-	t_node	**b;
+	int	length;
+	int	min_index;
 
-	b = malloc(sizeof(t_node *));
-	if (!b)
-		return ;
-	*b = NULL;
 	length = node_size(a);
 	min_index = find_smallest_index(a);
 	while (length > 3)
@@ -72,21 +69,26 @@ void	sort_medium(t_node **a)
 			ft_r(a, 'a');
 			min_index--;
 		}
-		ft_p(a, b, 'a');
+		ft_p(b, a, 'b');
 		length--;
 	}
 	sort_small(a);
-	ft_p(b, a, 'b');
-	ft_p(b, a, 'b');
+	ft_p(a, b, 'a');
+	ft_p(a, b, 'a');
 }
 
 void	push_swap_by_size(t_node **a)
 {
-	int	size;
+	int		size;
+	t_node	**b;
 
 	if (!a || !*a || !(*a)->next)
 		return ;
 	size = node_size(a);
+	b = malloc(sizeof(t_node *));
+	if (!b)
+		return ;
+	*b = NULL;
 	if (size == 2)
 	{
 		if ((*a)->value > (*a)->next->value)
@@ -96,8 +98,8 @@ void	push_swap_by_size(t_node **a)
 	}
 	else if (size == 3)
 		sort_small(a);
-	else if (size <= 5 && size >= 4)
-		sort_medium(a);
-	else if (size > 5)
-		sort_big(a);
+	else if (size == 4 || size == 5)
+		sort_medium(a, b);
+	else
+		sort_big(a, b);
 }

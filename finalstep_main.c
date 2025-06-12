@@ -14,6 +14,32 @@
 #include <unistd.h>
 #include <limits.h>
 
+long	ft_atoi(char *s)
+{
+	int		sign;
+	long	nbr;
+
+	sign = 1;
+	nbr = 0;
+	if (*s == '0')
+		return (nbr * sign);
+	if (*s == '+')
+		s++;
+	else if (*s == '-')
+	{
+		sign = -1;
+		s++;
+	}
+	while (*s)
+	{
+		if (*s < '0' || *s > '9')
+			return (0);
+		nbr = nbr * 10 + (*s - '0');
+		s++;
+	}
+	return (nbr * sign);
+}
+
 static int	check_input(char **input)
 {
 	int	i;

@@ -6,50 +6,11 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 17:34:15 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/12 16:02:20 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/12 16:25:29 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-
-long	ft_atoi(char *s)
-{
-	int		sign;
-	long	nbr;
-
-	sign = 1;
-	nbr = 0;
-	if (*s == '0')
-		return (nbr * sign);
-	if (*s == '+')
-		s++;
-	else if (*s == '-')
-	{
-		sign = -1;
-		s++;
-	}
-	while (*s)
-	{
-		if (*s < '0' || *s > '9')
-			return (0);
-		nbr = nbr * 10 + (*s - '0');
-		s++;
-	}
-	return (nbr * sign);
-}
-
-void	free_stack(t_node **start)
-{
-	t_node	*tmp;
-
-	while (*start)
-	{
-		tmp = *start;
-		*start = (*start)->next;
-		free (tmp);
-	}
-	free (start);
-}
 
 t_stack	*get_nbr_stack(char **input)
 {
@@ -63,15 +24,18 @@ t_stack	*get_nbr_stack(char **input)
 		count++;
 	array = malloc(sizeof(int) * count);
 	if (!array)
-		return(free (array), NULL);
-	stk = malloc(sizeof(t_stack) * 1);
-	if (!stk)
 		return (NULL);
 	i = 0;
 	while (i < count)
 	{
 		array[i] = (int)ft_atoi(input[i + 1]);
 		i++;
+	}
+	stk = malloc(sizeof(t_stack) * 1);
+	if (!stk)
+	{
+		free (array);
+		return (NULL);
 	}
 	stk->arr = array;
 	stk->size = count;
@@ -90,11 +54,12 @@ t_node	**get_node(t_stack *stk)
 	start = malloc(sizeof(t_node *));
 	if (!start)
 		return (NULL);
+	*start = NULL;
 	current = NULL;
 	i = 0;
 	while (i < stk->size)
 	{
-		new = malloc(sizeof(t_node) * 1);
+		new = malloc(sizeof(t_node));
 		if (!new)
 			return (free(start), NULL);
 		new->value = stk->arr[i];
@@ -124,4 +89,17 @@ int	node_size(t_node **nd)
 		tmp = tmp->next;
 	}
 	return (size);
+}
+
+void	free_stack(t_node **start)
+{
+	t_node	*tmp;
+
+	while (*start)
+	{
+		tmp = *start;
+		*start = (*start)->next;
+		free (tmp);
+	}
+	free (start);
 }
