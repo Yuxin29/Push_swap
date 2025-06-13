@@ -45,6 +45,7 @@ static int	find_smallest_index(t_node **nd)
 		if (tmp->value < min)
 		{
 			min = tmp->value;
+		
 			min_ind = ind;
 		}
 		ind++;
@@ -61,26 +62,28 @@ void	sort_medium(t_node **a, t_node **b)
 	int	pushed;
 
 	length = node_size(a);
-	min_index = find_smallest_index(a);
 	pushed = 0;
 	while (length > 3)
 	{
 		min_index = find_smallest_index(a) - 1;
-		while (min_index > 0)
+		if (min_index <= length / 2)
 		{
-			ft_r(a, 'a');
-			min_index--;
+			while (min_index-- > 0)
+				ft_r(a, 'a');
+		}
+		else
+		{
+			min_index = length - min_index;
+			while (min_index-- > 0)
+				ft_rr(a, 'a');
 		}
 		ft_p(b, a, 'b');
 		length--;
 		pushed++;
 	}
 	sort_small(a);
-	while (pushed > 0)
-        {
-        	ft_p(a, b, 'a');
-        	pushed--;
-	}
+	while (pushed-- > 0)
+		ft_p(a, b, 'a');
 }
 
 void	push_swap_by_size(t_node **a)

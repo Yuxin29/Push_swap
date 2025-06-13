@@ -49,10 +49,10 @@ typedef struct s_stack
 
 //below are input dealing functions
 long	ft_atoi(char *s);
-void	free_stack(t_node **start);
 t_stack	*get_nbr_stack(char **input);
 t_node	**get_node(t_stack *stk);
 int	node_size(t_node **nd);
+void	free_stack(t_node **start);
 
 //operations
 void	ft_s(t_node **a, char name);
@@ -60,13 +60,13 @@ void	ft_p(t_node **dst, t_node **src, char name_dst);
 void	ft_r(t_node **a, char name);
 void	ft_rr(t_node **a, char name);
 
-//sorting 
+//sorting, sort_big has its own 2 static helpers inside
 void	push_swap_by_size(t_node **a);
 void	sort_small(t_node **a);
-void	sort_medium(t_node **a);
-void	sort_big(t_node **a);
+void	sort_medium(t_node **a, t_node **b);
+void	sort_big(t_node **a, t_node **b);
 
-//main
+//main: includeing 3 static checker inside
 int	main(int argc, char **argv);
 
 #endif

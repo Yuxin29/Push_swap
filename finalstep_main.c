@@ -86,6 +86,20 @@ static int	check_dup(char **input)
 	return (free(stk), 1);
 }
 
+static int	is_sorted(t_node **nd)
+{
+	t_node	*tmp;
+
+	tmp = *nd;
+	while (tmp && tmp->next)
+	{
+		if (tmp->value > tmp->next->value)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
+
 int	main(int argc, char **argv)
 {
 	t_stack	*stk;
@@ -118,6 +132,7 @@ int	main(int argc, char **argv)
 		write(2, "Error\n", 6);
 		exit(1);
 	}
-	push_swap_by_size(nd);
+	if (is_sorted(nd) == 0)
+		push_swap_by_size(nd);
 	return (free(stk), free_stack(nd), 0);
 }

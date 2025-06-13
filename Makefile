@@ -10,7 +10,7 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME := push_swap.a
+NAME := push_swap
 HEADERS := push_swap.h
 CFLAGS := -Wall -Wextra -Werror
 CC := cc
