@@ -19,15 +19,21 @@ static int	check_is_digit(char **input)
 	int	i;
 	int	j;
 
-	i = 1;
+	i = 0;
 	while (input[i])
 	{
 		j = 0;
-		if {input[i][j] == '+' || input[i][j] == '-'}
+		if (input[i][j] == '+' || input[i][j] == '-')
+		{
 			j++;
+			if (!input[i][j])
+				return (0);
+		}
+		if (input[i][j] == '0' && input[i][j + 1] != '\0')
+			return (0);
 		while (input[i][j])
 		{
-			if {input[i][j] < '0' || input[i][j] > '9'}
+			if (input[i][j] < '0' || input[i][j] > '9')
 				return (0);
 			j++;
 		}
@@ -36,29 +42,48 @@ static int	check_is_digit(char **input)
 	return (1);
 }
 
-static int	check_dup(char **input);
+static int	check_max_min(char **input)
 {
-	while (*input)
+	int	i;
+	long	value;
+
+	i = 0;
+	while (input[i])
 	{
-		if ()
+		value = ft_atoi(input[i]);
+		if (value < INT_MIN || value > INT_MAX)
 			return (0);
-		input++;
+		i++;
 	}
 	return (1);
 }
 
-static int	check_max_min(char **input)
+static int	check_dup(char **input)
 {
-	long	value;
-
-	while (*input)
+	t_stack	*stk;
+	int	i;
+	int	j;
+	int	count;
+	
+	stk = get_nbr_stack(input);
+	if (!stk)
+		return (0);
+	i = 0;
+	while (i < stk->size)
 	{
-		value = ft_atoi(*input);
-		if (value < INT_MIN || VALUE > INT_MAX)
-			return (0);
-		input++;
+		j = 0;
+		count = 0;
+		while (j < stk->size)
+		{
+			if ((stk->arr)[i] == (stk->arr)[j])
+				count++;
+			j++;
+		}
+		if (count > 1)
+			return (free(stk), 0);
+		i++;
 	}
-	return (1);
+	return (free(stk), 1);
 }
 
 int	main(int argc, char **argv)
@@ -66,28 +91,33 @@ int	main(int argc, char **argv)
 	t_stack	*stk;
 	t_node	**nd;
 
-	if (argc < 3)
+	if (argc < 2)
 	{
 		write(2, "Error\n", 6);
-		return (1);
+		exit(1);
 	}
-	if (!check_is_digit(argv) || !check_dup(argv) || !check_max_min(argv))
+	if (argv[1] && !argv[1][0])
 	{
 		write(2, "Error\n", 6);
-		return (1);
+		exit(1);
 	}
-	stk = get_nbr_stack(argv);
+	if (!check_is_digit(&argv[1]) || !check_max_min(&argv[1]) || !check_dup(&argv[1]))
+	{
+		write(2, "Error\n", 6);
+		exit(1);
+	}
+	stk = get_nbr_stack(&argv[1]);
 	if (!stk)
 	{
 		write(2, "Error\n", 6);
-		return (1);
+		exit(1);
 	}
 	nd = get_node(stk);
 	if (!nd)
 	{
 		write(2, "Error\n", 6);
-		return (1);
+		exit(1);
 	}
 	push_swap_by_size(nd);
-	return (0);
+	return (free(stk), free_stack(nd), 0);
 }

@@ -24,6 +24,8 @@ static int	max_bits(t_node **a)
 	t_node	*tmp;
 
 	tmp = *a;
+	if (!tmp)
+		return (0);
 	max = tmp->value;
 	while (tmp)
 	{

@@ -13,7 +13,7 @@
 #include "push_swap.h"
 
 /*
-in this sort, we do the push&swap and record and return the oprations
+Do the push&swap and record and return the oprations
 Receive stack A with all numbers. Stack B is empty.
 */
 
@@ -58,12 +58,14 @@ void	sort_medium(t_node **a, t_node **b)
 {
 	int	length;
 	int	min_index;
+	int	pushed;
 
 	length = node_size(a);
 	min_index = find_smallest_index(a);
+	pushed = 0;
 	while (length > 3)
 	{
-		min_index = find_smallest_index(a);
+		min_index = find_smallest_index(a) - 1;
 		while (min_index > 0)
 		{
 			ft_r(a, 'a');
@@ -71,10 +73,14 @@ void	sort_medium(t_node **a, t_node **b)
 		}
 		ft_p(b, a, 'b');
 		length--;
+		pushed++;
 	}
 	sort_small(a);
-	ft_p(a, b, 'a');
-	ft_p(a, b, 'a');
+	while (pushed > 0)
+        {
+        	ft_p(a, b, 'a');
+        	pushed--;
+	}
 }
 
 void	push_swap_by_size(t_node **a)
@@ -93,8 +99,6 @@ void	push_swap_by_size(t_node **a)
 	{
 		if ((*a)->value > (*a)->next->value)
 			(ft_s(a, 'a'));
-		else
-			return ;
 	}
 	else if (size == 3)
 		sort_small(a);
@@ -102,4 +106,5 @@ void	push_swap_by_size(t_node **a)
 		sort_medium(a, b);
 	else
 		sort_big(a, b);
+	free(b);
 }

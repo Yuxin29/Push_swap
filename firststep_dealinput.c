@@ -11,6 +11,7 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
+#include "limits.h"
 
 long	ft_atoi(char *s)
 {
@@ -39,10 +40,11 @@ t_stack	*get_nbr_stack(char **input)
 	int		i;
 	int		count;
 	int		*array;
+	long		value;
 	t_stack	*stk;
 
 	count = 0;
-	while (input[count + 1])
+	while (input[count])
 		count++;
 	array = malloc(sizeof(int) * count);
 	if (!array)
@@ -50,7 +52,11 @@ t_stack	*get_nbr_stack(char **input)
 	i = 0;
 	while (i < count)
 	{
-		array[i] = (int)ft_atoi(input[i + 1]);
+		
+		value = ft_atoi(input[i]);
+		if (value > INT_MAX || value < INT_MIN)
+			return (free(array), NULL);
+		array[i] = (int)value;
 		i++;
 	}
 	stk = malloc(sizeof(t_stack) * 1);
@@ -83,7 +89,7 @@ t_node	**get_node(t_stack *stk)
 	{
 		new = malloc(sizeof(t_node));
 		if (!new)
-			return (free(start), NULL);
+			return (free_stack(start), NULL);
 		new->value = stk->arr[i];
 		new->next = NULL;
 		if (!*start)
