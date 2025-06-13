@@ -17,29 +17,21 @@ value >> i shifts the bits of value to the right by i places.
 & 1 isolates the least significant bit after shifting.
 */
 
-static int	max_bits(t_node **a)
+static int max_bits(t_node **a, int off_set)
 {
-	int		bits;
-	int		max;
-	t_node	*tmp;
-
-	tmp = *a;
-	if (!tmp)
-		return (0);
-	max = tmp->value;
-	while (tmp)
-	{
-		if (tmp->value > max)
-			max = tmp->value;
-		tmp = tmp->next;
-	}
-	bits = 0;
-	while (max > 0)
-	{
-		max /= 2;
-		bits++;
-	}
-	return (bits);
+    int max = 0;
+    t_node *tmp = *a;
+    while (tmp)
+    {
+        int val = tmp->value + off_set;
+        if (val > max)
+            max = val;
+        tmp = tmp->next;
+    }
+    int bits = 0;
+    while ((max >> bits) != 0)
+        bits++;
+    return bits;
 }
 
 static int	dealing_minus(t_node **a)
@@ -70,8 +62,8 @@ void	sort_big(t_node **a, t_node **b)
 	int		off_set;
 
 	i = 0;
-	max_bit = max_bits(a);
 	off_set = dealing_minus(a);
+	max_bit = max_bits(a, off_set);
 	while (i < max_bit)
 	{
 		size = node_size(a);
