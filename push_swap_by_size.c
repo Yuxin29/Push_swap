@@ -45,7 +45,6 @@ static int	find_smallest_index(t_node **nd)
 		if (tmp->value < min)
 		{
 			min = tmp->value;
-		
 			min_ind = ind;
 		}
 		ind++;
@@ -91,7 +90,7 @@ void	push_swap_by_size(t_node **a)
 	int		size;
 	t_node	**b;
 
-	if (!a || !*a || !(*a)->next)
+	if (!a || !*a || !(*a)->next || is_sorted(a))
 		return ;
 	size = node_size(a);
 	b = malloc(sizeof(t_node *));
@@ -99,15 +98,16 @@ void	push_swap_by_size(t_node **a)
 		return ;
 	*b = NULL;
 	if (size == 2)
-	{
-		if ((*a)->value > (*a)->next->value)
-			(ft_s(a, 'a'));
-	}
+		(ft_s(a, 'a'));
 	else if (size == 3)
 		sort_small(a);
 	else if (size == 4 || size == 5)
 		sort_medium(a, b);
 	else
 		sort_big(a, b);
-	free(b);
+	if (b)
+	{
+		free_node(b);
+		free(b);
+	}
 }

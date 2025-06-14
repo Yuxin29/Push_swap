@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 17:34:15 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/12 16:25:29 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/14 13:29:06 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,10 @@ long	ft_atoi(char *s)
 
 	sign = 1;
 	nbr = 0;
+	if (!s || !*s)
+		return (FT_ATOI_ERROR);
+	while (*s == ' ' || (*s >= 9 && *s <= 13))
+		s++;
 	if (*s == '+')
 		s++;
 	else if (*s == '-')
@@ -27,11 +31,15 @@ long	ft_atoi(char *s)
 		sign = -1;
 		s++;
 	}
-	while (*s)
+	if (!(*s >= '0' && *s <= '9'))
+		return (FT_ATOI_ERROR);
+	while (*s && (*s >= '0' && *s <= '9'))
 	{
 		nbr = nbr * 10 + (*s - '0');
 		s++;
 	}
+	if (*s)
+		return (FT_ATOI_ERROR);
 	return (nbr * sign);
 }
 
@@ -40,7 +48,7 @@ t_stack	*get_nbr_stack(char **input)
 	int		i;
 	int		count;
 	int		*array;
-	long		value;
+	long	value;
 	t_stack	*stk;
 
 	count = 0;
@@ -52,19 +60,15 @@ t_stack	*get_nbr_stack(char **input)
 	i = 0;
 	while (i < count)
 	{
-		
 		value = ft_atoi(input[i]);
-		if (value > INT_MAX || value < INT_MIN)
+		if (value == FT_ATOI_ERROR || value > INT_MAX || value < INT_MIN)
 			return (free(array), NULL);
 		array[i] = (int)value;
 		i++;
 	}
 	stk = malloc(sizeof(t_stack) * 1);
 	if (!stk)
-	{
-		free (array);
-		return (NULL);
-	}
+		return (free (array), NULL);
 	stk->arr = array;
 	stk->size = count;
 	return (stk);
@@ -89,7 +93,7 @@ t_node	**get_node(t_stack *stk)
 	{
 		new = malloc(sizeof(t_node));
 		if (!new)
-			return (free_stack(start), NULL);
+			return (free_node(start), free(start), NULL);
 		new->value = stk->arr[i];
 		new->next = NULL;
 		if (!*start)
@@ -102,32 +106,25 @@ t_node	**get_node(t_stack *stk)
 	return (start);
 }
 
-int	node_size(t_node **nd)
+void	free_stack(t_stack *stk)
 {
-	int		size;
-	t_node	*tmp;
-
-	size = 0;
-	if (!nd || !(*nd))
-		return (0);
-	tmp = *nd;
-	while (tmp)
-	{
-		size++;
-		tmp = tmp->next;
-	}
-	return (size);
+	if (!stk)
+		return ;
+	if (stk->arr)
+		free(stk->arr);
+	free(stk);
 }
 
-void	free_stack(t_node **start)
+void	free_node(t_node **start)
 {
 	t_node	*tmp;
 
+	if (!start)
+		return ;
 	while (*start)
 	{
-		tmp = *start;
-		*start = (*start)->next;
-		free (tmp);
+		tmp = (*start)->next;
+		free(*start);
+		*start = tmp;
 	}
-	free (start);
 }

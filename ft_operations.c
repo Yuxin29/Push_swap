@@ -17,6 +17,23 @@ print the operation (eg,"sa\n"), return and store it to print later in main()
 ss: sa + sb; rr: ra + rb; rrr: rra + rrb    
 */
 
+int	node_size(t_node **nd)
+{
+	int		size;
+	t_node	*tmp;
+
+	size = 0;
+	if (!nd || !(*nd))
+		return (0);
+	tmp = *nd;
+	while (tmp)
+	{
+		size++;
+		tmp = tmp->next;
+	}
+	return (size);
+}
+
 //swaps: - sa / sb: swap the first two elements
 void	ft_s(t_node **nd, char name)
 {

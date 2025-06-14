@@ -6,15 +6,14 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 16:48:42 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/06 16:40:03 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/14 17:31:49 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <unistd.h>
 #include <limits.h>
 
-static int	check_is_digit(char **input)
+static int	check_digit(char **input)
 {
 	int	i;
 	int	j;
@@ -42,9 +41,9 @@ static int	check_is_digit(char **input)
 	return (1);
 }
 
-static int	check_max_min(char **input)
+static int	check_mm(char **input)
 {
-	int	i;
+	int		i;
 	long	value;
 
 	i = 0;
@@ -61,10 +60,10 @@ static int	check_max_min(char **input)
 static int	check_dup(char **input)
 {
 	t_stack	*stk;
-	int	i;
-	int	j;
-	int	count;
-	
+	int		i;
+	int		j;
+	int		count;
+
 	stk = get_nbr_stack(input);
 	if (!stk)
 		return (0);
@@ -80,16 +79,18 @@ static int	check_dup(char **input)
 			j++;
 		}
 		if (count > 1)
-			return (free(stk), 0);
+			return (free(stk->arr), free(stk), 1);
 		i++;
 	}
-	return (free(stk), 1);
+	return (free(stk->arr), free(stk), 0);
 }
 
-static int	is_sorted(t_node **nd)
+int	is_sorted(t_node **nd)
 {
 	t_node	*tmp;
 
+	if (!nd || !*nd)
+		return (1);
 	tmp = *nd;
 	while (tmp && tmp->next)
 	{
@@ -106,33 +107,24 @@ int	main(int argc, char **argv)
 	t_node	**nd;
 
 	if (argc < 2)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		return (write(2, "Error\n", 6), 1);
 	if (argv[1] && !argv[1][0])
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
-	if (!check_is_digit(&argv[1]) || !check_max_min(&argv[1]) || !check_dup(&argv[1]))
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		return (write(2, "Error\n", 6), 1);
+	if (!check_digit(&argv[1]) || !check_mm(&argv[1]) || !check_dup(&argv[1]))
+		return (write(2, "Error\n", 6), 1);
 	stk = get_nbr_stack(&argv[1]);
 	if (!stk)
-	{
-		write(2, "Error\n", 6);
-		exit(1);
-	}
+		return (write(2, "Error\n", 6), 1);
 	nd = get_node(stk);
 	if (!nd)
 	{
-		write(2, "Error\n", 6);
-		exit(1);
+		free_stack(stk);
+		return (write(2, "Error\n", 6), 1);
 	}
-	if (is_sorted(nd) == 0)
+	if (!is_sorted(nd))
 		push_swap_by_size(nd);
-	return (free(stk), free_stack(nd), 0);
+	free_stack(stk);
+	free_node(nd);
+	free(nd);
+	return (0);
 }
