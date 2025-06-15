@@ -6,12 +6,11 @@
 #    By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/03 16:36:29 by yuwu              #+#    #+#              #
-#    Updated: 2025/06/03 16:37:39 by yuwu             ###   ########.fr        #
+#    Updated: 2025/06/15 18:44:12 by yuwu             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := push_swap
-HEADERS := push_swap.h
 CFLAGS := -Wall -Wextra -Werror
 CC := cc
 
@@ -24,10 +23,7 @@ SRCS := firststep_dealinput.c \
 OBJS := $(SRCS:%.c=%.o)
 
 $(NAME): $(OBJS)
-		ar -rcs $@ $^
-
-%.o: %.c $(HEADERS)
-		$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(OBJS) -o $(NAME)
 
 all: $(NAME)
 

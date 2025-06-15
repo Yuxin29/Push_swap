@@ -1,0 +1,45 @@
+In the subject pdf, commands as follow are provided to test the program: 
+$>ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
+6
+$>ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_OS $ARG
+OK
+$>
+
+in my case, I need to use:
+$>ARG="4 67 3 87 23"; eval ./push_swap $ARG | wc -l
+$>ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_OS $ARG
+
+eval is a bash built-in command that evaluates arguments as a bash command. In simpler terms, it re-runs the command you give it as if it were typed out again by the shell.
+
+Here’s the breakdown:
+
+- ARG="4 67 3 87 23":
+	This creates a variable ARG with the value "4 67 3 87 23".
+- eval ./push_swap $ARG:
+	Normally, $ARG is expanded into 4 67 3 87 23, so you end up running ./push_swap 4 67 3 87 23.
+	What eval does is ensure that this expansion happens correctly by evaluating the command line again as if it were typed directly into the shell.
+	Without eval, the $ARG expansion might behave slightly differently because of how bash interprets variable expansions.
+	
+	
+*Why eval fixes it:
+	When you run ./push_swap $ARG without eval, the shell expands $ARG (the list of numbers) directly. But sometimes this can lead to issues if the expansion isn't handled as expected (like unexpected spaces, or special characters causing problems).
+	eval forces the shell to reprocess the entire command, treating it as a fresh command line, so everything is expanded and handled properly.
+*Why It Wasn't Working Before Without eval:
+	Shell expansion can sometimes be tricky with complex commands or variables.
+	Without eval, bash might not correctly interpret $ARG in some contexts, leading to the shell not passing the arguments correctly to push_swap.
+	With eval, you're ensuring that the command is re-processed by the shell exactly as it was intended, resolving any potential issues with argument handling.
+
+
+So, to summarize
+- eval ensures that your command (with expanded arguments) is properly interpreted and executed by the shell, which fixed the problem of push_swap not working without it.
+- It basically re-processes the entire command line, which is why the expansion works as expected in this scenario.
+
+
+
+c1r6p5% echo $SHELL
+/bin/zsh
+c1r6p5% bash                                             
+yuwu@c1r6p5:~/42/Push_swap$ ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
+9
+yuwu@c1r6p5:~/42/Push_swap$ ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
+

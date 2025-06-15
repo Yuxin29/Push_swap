@@ -27,7 +27,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-//# include <fcntl.h>
 # include <limits.h>
 
 # define FT_ATOI_ERROR LONG_MIN
@@ -71,10 +70,3 @@ int		is_sorted(t_node **a);
 int		main(int argc, char **argv);
 
 #endif
-
-/*
-for exit and malloc: <stdlib.h>
-void	exit(int status);
-for read: <fcntl.h>
-ssize_t  read(int fd, void *buf, size_t count);
-*/

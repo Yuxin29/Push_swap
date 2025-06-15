@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/06 16:17:21 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/14 13:29:36 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/15 19:44:41 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@ value >> i shifts the bits of value to the right by i places.
 & 1 isolates the least significant bit after shifting.
 */
 
-static int	dealing_minus(t_node **a)
+static long	dealing_minus(t_node **a)
 {
-	int		off_set;
+	long	off_set;
 	int		min;
 	t_node	*tmp;
 
@@ -35,7 +35,7 @@ static int	dealing_minus(t_node **a)
 		tmp = tmp->next;
 	}
 	if (min < 0)
-		off_set = -min;
+		off_set = (long)(-min);
 	return (off_set);
 }
 
@@ -65,10 +65,10 @@ static int	max_bits(t_node **a, int off_set)
 
 void	sort_big(t_node **a, t_node **b)
 {
-	int		max_bit;
-	int		i;
-	int		size;
-	int		off_set;
+	int			max_bit;
+	int			i;
+	int			size;
+	long		off_set;
 
 	i = 0;
 	off_set = dealing_minus(a);
