@@ -11,50 +11,65 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include <limits.h>
+
+int	is_sorted(t_node **nd)
+{
+	t_node	*tmp;
+
+	if (!nd || !*nd)
+		return (1);
+	tmp = *nd;
+	while (tmp && tmp->next)
+	{
+		if (tmp->value > tmp->next->value)
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
+}
 
 static int	check_digit(char **input)
 {
-	int	i;
 	int	j;
 
-	i = 0;
-	while (input[i])
+	while (*input)
 	{
 		j = 0;
-		if (input[i][j] == '+' || input[i][j] == '-')
-		{
-			j++;
-			if (!input[i][j])
-				return (0);
-		}
-		if (input[i][j] == '0' && input[i][j + 1] != '\0')
+		if (!(*input)[j])
 			return (0);
-		while (input[i][j])
+		if ((*input)[j] == '+' || (*input)[j] == '-')
+			j++;
+		if (!(*input)[j])
+			return (0);
+		if ((*input)[j] == '0' && (*input)[j + 1] != '\0')
+			return (0);
+		while ((*input)[j])
 		{
-			if (input[i][j] < '0' || input[i][j] > '9')
+			if ((*input)[j] < '0' || (*input)[j] > '9')
 				return (0);
 			j++;
 		}
-		i++;
+		input++;
 	}
 	return (1);
 }
 
 static int	check_mm(char **input)
 {
-	int		i;
-	long	value;
+	long	v;
 
-	i = 0;
-	while (input[i])
+	if (check_digit(input))
 	{
-		value = ft_atoi(input[i]);
-		if (value < INT_MIN || value > INT_MAX)
-			return (0);
-		i++;
+		while (*input)
+		{
+			v = ft_atoi(*input);
+			if (v == FT_ATOI_ERROR || v > INT_MAX || v < INT_MIN)
+				return (0);
+			input++;
+		}
+		return (1);
 	}
-	return (1);
+	return (0);
 }
 
 static int	check_dup(char **input)
@@ -79,40 +94,22 @@ static int	check_dup(char **input)
 			j++;
 		}
 		if (count > 1)
-			return (free(stk->arr), free(stk), 1);
+			return (free(stk->arr), free(stk), 0);
 		i++;
 	}
-	return (free(stk->arr), free(stk), 0);
+	return (free(stk->arr), free(stk), 1);
 }
 
-int	is_sorted(t_node **nd)
-{
-	t_node	*tmp;
-
-	if (!nd || !*nd)
-		return (1);
-	tmp = *nd;
-	while (tmp && tmp->next)
-	{
-		if (tmp->value > tmp->next->value)
-			return (0);
-		tmp = tmp->next;
-	}
-	return (1);
-}
-
-int	main(int argc, char **argv)
+int	main(int ac, char **av)
 {
 	t_stack	*stk;
 	t_node	**nd;
 
-	if (argc < 2)
+	if (ac < 2)
 		return (write(2, "Error\n", 6), 1);
-	if (argv[1] && !argv[1][0])
+	if (!check_digit(&av[1]) || !check_mm(&av[1]) || !check_dup(&av[1]))
 		return (write(2, "Error\n", 6), 1);
-	if (!check_digit(&argv[1]) || !check_mm(&argv[1]) || !check_dup(&argv[1]))
-		return (write(2, "Error\n", 6), 1);
-	stk = get_nbr_stack(&argv[1]);
+	stk = get_nbr_stack(&av[1]);
 	if (!stk)
 		return (write(2, "Error\n", 6), 1);
 	nd = get_node(stk);

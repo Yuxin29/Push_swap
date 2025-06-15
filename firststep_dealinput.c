@@ -11,35 +11,31 @@
 /* ************************************************************************** */
 
 #include "push_swap.h"
-#include "limits.h"
 
 long	ft_atoi(char *s)
 {
 	int		sign;
 	long	nbr;
+	long	max_mod_10;
 
 	sign = 1;
 	nbr = 0;
-	if (!s || !*s)
-		return (FT_ATOI_ERROR);
-	while (*s == ' ' || (*s >= 9 && *s <= 13))
-		s++;
+	max_mod_10 = MAX_MOD_10;
 	if (*s == '+')
 		s++;
 	else if (*s == '-')
 	{
 		sign = -1;
 		s++;
+		max_mod_10++;
 	}
-	if (!(*s >= '0' && *s <= '9'))
-		return (FT_ATOI_ERROR);
 	while (*s && (*s >= '0' && *s <= '9'))
 	{
+		if (nbr > MAX_DIV_10 || (nbr == MAX_DIV_10 && (*s - '0') > max_mod_10))
+			return (FT_ATOI_ERROR);
 		nbr = nbr * 10 + (*s - '0');
 		s++;
 	}
-	if (*s)
-		return (FT_ATOI_ERROR);
 	return (nbr * sign);
 }
 
@@ -48,7 +44,6 @@ t_stack	*get_nbr_stack(char **input)
 	int		i;
 	int		count;
 	int		*array;
-	long	value;
 	t_stack	*stk;
 
 	count = 0;
@@ -57,15 +52,9 @@ t_stack	*get_nbr_stack(char **input)
 	array = malloc(sizeof(int) * count);
 	if (!array)
 		return (NULL);
-	i = 0;
-	while (i < count)
-	{
-		value = ft_atoi(input[i]);
-		if (value == FT_ATOI_ERROR || value > INT_MAX || value < INT_MIN)
-			return (free(array), NULL);
-		array[i] = (int)value;
-		i++;
-	}
+	i = -1;
+	while (++i < count)
+		array[i] = (int)ft_atoi(input[i]);
 	stk = malloc(sizeof(t_stack) * 1);
 	if (!stk)
 		return (free (array), NULL);
@@ -81,15 +70,13 @@ t_node	**get_node(t_stack *stk)
 	t_node	*new;
 	int		i;
 
-	if (!stk)
-		return (NULL);
 	start = malloc(sizeof(t_node *));
-	if (!start)
+	if (!start || !stk)
 		return (NULL);
 	*start = NULL;
 	current = NULL;
-	i = 0;
-	while (i < stk->size)
+	i = -1;
+	while (++i < stk->size)
 	{
 		new = malloc(sizeof(t_node));
 		if (!new)
@@ -101,7 +88,6 @@ t_node	**get_node(t_stack *stk)
 		else
 			current->next = new;
 		current = new;
-		i++;
 	}
 	return (start);
 }

@@ -84,7 +84,7 @@ void	sort_big(t_node **a, t_node **b)
 				ft_p(b, a, 'b');
 			size--;
 		}
-		while (b)
+		while (*b)
 			ft_p(a, b, 'a');
 		i++;
 	}

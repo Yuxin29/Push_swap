@@ -27,9 +27,12 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <fcntl.h>
+//# include <fcntl.h>
+# include <limits.h>
 
-#define FT_ATOI_ERROR LONG_MIN
+# define FT_ATOI_ERROR LONG_MIN
+# define MAX_DIV_10 214748364
+# define MAX_MOD_10 7
 
 typedef struct s_node
 {
@@ -51,7 +54,7 @@ void	free_node(t_node **start);
 void	free_stack(t_stack *stk);
 
 //operations
-int	node_size(t_node **nd);
+int		node_size(t_node **nd);
 void	ft_s(t_node **a, char name);
 void	ft_p(t_node **dst, t_node **src, char name_dst);
 void	ft_r(t_node **a, char name);

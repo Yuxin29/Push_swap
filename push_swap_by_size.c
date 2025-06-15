@@ -37,8 +37,8 @@ static int	find_smallest_index(t_node **nd)
 	t_node	*tmp;
 
 	min = (*nd)->value;
-	min_ind = 1;
-	ind = 1;
+	min_ind = 0;
+	ind = 0;
 	tmp = *nd;
 	while (tmp)
 	{
@@ -64,12 +64,10 @@ void	sort_medium(t_node **a, t_node **b)
 	pushed = 0;
 	while (length > 3)
 	{
-		min_index = find_smallest_index(a) - 1;
+		min_index = find_smallest_index(a);
 		if (min_index <= length / 2)
-		{
 			while (min_index-- > 0)
 				ft_r(a, 'a');
-		}
 		else
 		{
 			min_index = length - min_index;
