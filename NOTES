@@ -7,7 +7,7 @@ $>
 
 in my case, I need to use:
 $>ARG="4 67 3 87 23"; eval ./push_swap $ARG | wc -l
-$>ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_OS $ARG
+$>ARG="4 67 3 87 23"; eval ./push_swap $ARG | ./checker_OS $ARG
 
 eval is a bash built-in command that evaluates arguments as a bash command. In simpler terms, it re-runs the command you give it as if it were typed out again by the shell.
 
