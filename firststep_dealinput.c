@@ -6,7 +6,7 @@
 /*   By: yuwu <yuwu@student.hive.fi>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/06/03 17:34:15 by yuwu              #+#    #+#             */
-/*   Updated: 2025/06/14 13:29:06 by yuwu             ###   ########.fr       */
+/*   Updated: 2025/06/17 22:56:22 by yuwu             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,22 +16,24 @@ long	ft_atoi(char *s)
 {
 	int		sign;
 	long	nbr;
-	long	max_mod_10;
+	int		max_digit;
 
 	sign = 1;
 	nbr = 0;
-	max_mod_10 = MAX_MOD_10;
+	while (*s == ' ' || (*s >= '\t' && *s <= '\r'))
+		s++;
+	max_digit = 7;
 	if (*s == '+')
 		s++;
 	else if (*s == '-')
 	{
 		sign = -1;
 		s++;
-		max_mod_10++;
+		max_digit = 8;
 	}
 	while (*s && (*s >= '0' && *s <= '9'))
 	{
-		if (nbr > MAX_DIV_10 || (nbr == MAX_DIV_10 && (*s - '0') > max_mod_10))
+		if (nbr > MAX_D_10 || (nbr == MAX_D_10 && (*s - '0') > max_digit))
 			return (FT_ATOI_ERROR);
 		nbr = nbr * 10 + (*s - '0');
 		s++;
@@ -75,13 +77,13 @@ t_node	**get_node(t_stack *stk)
 		return (NULL);
 	*start = NULL;
 	current = NULL;
-	i = -1;
-	while (++i < stk->size)
+	i = 0;
+	while (i < stk->size)
 	{
 		new = malloc(sizeof(t_node));
 		if (!new)
 			return (free_node(start), free(start), NULL);
-		new->value = stk->arr[i];
+		new->value = stk->arr[i++];
 		new->next = NULL;
 		if (!*start)
 			*start = new;

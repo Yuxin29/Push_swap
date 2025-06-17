@@ -54,13 +54,13 @@ static int	find_smallest_index(t_node **nd)
 }
 
 //4–5 elements: push smallest elements to B, sort 3 in A, push back.
-void	sort_medium(t_node **a, t_node **b)
+void	sort_medium(t_node **a, t_node **b, t_stack *stk)
 {
 	int	length;
 	int	min_index;
 	int	pushed;
 
-	length = node_size(a);
+	length = stk->size;
 	pushed = 0;
 	while (length > 3)
 	{
@@ -83,26 +83,24 @@ void	sort_medium(t_node **a, t_node **b)
 		ft_p(a, b, 'a');
 }
 
-void	push_swap_by_size(t_node **a)
+void	push_swap_by_size(t_node **a, t_stack *stk)
 {
-	int		size;
 	t_node	**b;
 
-	if (!a || !*a || !(*a)->next || is_sorted(a))
+	if (!a || !*a || !(*a)->next)
 		return ;
-	size = node_size(a);
 	b = malloc(sizeof(t_node *));
 	if (!b)
 		return ;
 	*b = NULL;
-	if (size == 2)
+	if (stk->size == 2)
 		(ft_s(a, 'a'));
-	else if (size == 3)
+	else if (stk->size == 3)
 		sort_small(a);
-	else if (size == 4 || size == 5)
-		sort_medium(a, b);
+	else if (stk->size == 4 || stk->size == 5)
+		sort_medium(a, b, stk);
 	else
-		sort_big(a, b);
+		sort_big(a, b, stk);
 	if (b)
 	{
 		free_node(b);

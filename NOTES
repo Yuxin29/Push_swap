@@ -1,13 +1,13 @@
 In the subject pdf, commands as follow are provided to test the program: 
 $>ARG="4 67 3 87 23"; ./push_swap $ARG | wc -l
 6
-$>ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_OS $ARG
-OK
+$>ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_linux $ARG
+KO
 $>
 
 in my case, I need to use:
 $>ARG="4 67 3 87 23"; eval ./push_swap $ARG | wc -l
-$>ARG="4 67 3 87 23"; eval ./push_swap $ARG | ./checker_OS $ARG
+$>ARG="4 67 3 87 23"; ./push_swap $ARG | ./checker_linux $ARG
 
 eval is a bash built-in command that evaluates arguments as a bash command. In simpler terms, it re-runs the command you give it as if it were typed out again by the shell.
 

@@ -10,40 +10,18 @@
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
-
-/*------------------the only new thing used here------------------
+/*------------------the only new thing used here-------------------------------
 value >> i shifts the bits of value to the right by i places.
 & 1 isolates the least significant bit after shifting.
 */
 
-static long	dealing_minus(t_node **a)
-{
-	long	off_set;
-	int		min;
-	t_node	*tmp;
+#include "push_swap.h"
 
-	if (!a || !*a)
-		return (0);
-	off_set = 0;
-	tmp = *a;
-	min = tmp->value;
-	while (tmp)
-	{
-		if (tmp->value < min)
-			min = tmp->value;
-		tmp = tmp->next;
-	}
-	if (min < 0)
-		off_set = (long)(-min);
-	return (off_set);
-}
-
-static int	max_bits(t_node **a, int off_set)
+//find the biggest number in t_node a and cast it into binary
+static int	max_bits(t_node **a)
 {
 	int		max;
 	t_node	*tmp;
-	int		val;
 	int		bits;
 
 	if (!a || !*a)
@@ -52,9 +30,8 @@ static int	max_bits(t_node **a, int off_set)
 	tmp = *a;
 	while (tmp)
 	{
-		val = tmp->value + off_set;
-		if (val > max)
-			max = val;
+		if (tmp->value > max)
+			max = tmp->value;
 		tmp = tmp->next;
 	}
 	bits = 0;
@@ -63,26 +40,81 @@ static int	max_bits(t_node **a, int off_set)
 	return (bits);
 }
 
-void	sort_big(t_node **a, t_node **b)
+//bubble sort the array
+static void	sort_stk_array(t_stack *stk)
 {
-	int			max_bit;
-	int			i;
-	int			size;
-	long		off_set;
+	int	i;
+	int	j;
+	int	tmp;
 
 	i = 0;
-	off_set = dealing_minus(a);
-	max_bit = max_bits(a, off_set);
+	while (i < (stk->size) - 1)
+	{
+		j = i + 1;
+		while (j < stk->size)
+		{
+			if (stk->arr[i] > stk->arr[j])
+			{
+				tmp = stk->arr[i];
+				stk->arr[i] = stk->arr[j];
+				stk->arr[j] = tmp;
+			}
+			j++;
+		}
+		i++;
+	}
+}
+
+//get the index of a certain number in the stk
+static int	get_index(t_stack *stk, int value)
+{
+	int	i;
+
+	i = 0;
+	while (i < stk->size)
+	{
+		if (stk->arr[i] == value)
+			return (i);
+		i++;
+	}
+	return (0);
+}
+
+// presort each node's value by its index in the sorted array
+static void	presort(t_node **a, t_stack *stk)
+{
+	t_node	*tmp;
+
+	tmp = *a;
+	if (!stk->arr)
+		return ;
+	sort_stk_array(stk);
+	while (tmp)
+	{
+		tmp->value = get_index(stk, tmp->value);
+		tmp = tmp->next;
+	}
+}
+
+void	sort_big(t_node **a, t_node **b, t_stack *stk)
+{
+	int	max_bit;
+	int	i;
+	int	j;
+
+	i = 0;
+	presort(a, stk);
+	max_bit = max_bits(a);
 	while (i < max_bit)
 	{
-		size = node_size(a);
-		while (size)
+		j = 0;
+		while (j < stk->size)
 		{
-			if ((((*a)->value + off_set) >> i) & 1)
+			if (((*a)->value >> i) & 1)
 				ft_r(a, 'a');
 			else
 				ft_p(b, a, 'b');
-			size--;
+			j++;
 		}
 		while (*b)
 			ft_p(a, b, 'a');

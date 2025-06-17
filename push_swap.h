@@ -30,8 +30,7 @@
 # include <limits.h>
 
 # define FT_ATOI_ERROR LONG_MIN
-# define MAX_DIV_10 214748364
-# define MAX_MOD_10 7
+# define MAX_D_10 214748364
 
 typedef struct s_node
 {
@@ -53,17 +52,16 @@ void	free_node(t_node **start);
 void	free_stack(t_stack *stk);
 
 //operations
-int		node_size(t_node **nd);
 void	ft_s(t_node **a, char name);
 void	ft_p(t_node **dst, t_node **src, char name_dst);
 void	ft_r(t_node **a, char name);
 void	ft_rr(t_node **a, char name);
 
-//sorting, sort_big has its own .c file and 2 static helpers inside
-void	push_swap_by_size(t_node **a);
+//sorting, sort_big has its own .c file and 4 static helpers inside
+void	push_swap_by_size(t_node **a, t_stack *stk);
 void	sort_small(t_node **a);
-void	sort_medium(t_node **a, t_node **b);
-void	sort_big(t_node **a, t_node **b);
+void	sort_medium(t_node **a, t_node **b, t_stack *stk);
+void	sort_big(t_node **a, t_node **b, t_stack *stk);
 
 //main: includeing 3 static checker inside
 int		is_sorted(t_node **a);
