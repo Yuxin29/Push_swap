@@ -11,14 +11,11 @@
 # **************************************************************************** #
 
 NAME := push_swap
-CFLAGS := -Wall -Wextra -Werror
+HEADERS := include/push_swap.h
+CFLAGS := -Wall -Wextra -Werror -Iinclude
 CC := cc
 
-SRCS := firststep_dealinput.c \
-	ft_operations.c \
-	push_swap_by_size.c \
-	sort_big.c \
-	finalstep_main.c \
+SRCS := $(wildcard src/*.c)
 
 OBJS := $(SRCS:%.c=%.o)
 
