@@ -25,9 +25,9 @@ Example:
 
 ## Build & Run
 
-1. Compilation
+1. Clone and change to the Push_swap directory
 ```
-Navigate to the project directory:
+git clone https://github.com/Yuxin29/Push_swap.git
 cd push_swap
 ```
 
@@ -45,8 +45,9 @@ make re      # Recompile everything from scratch
 3. Running the Program
 ```
 ./push_swap [numbers]
-
+```
 Example:
+```
 ./push_swap 3 2 1 5 4
 # The output will be a list of operations to sort the stack efficiently.
 ```
