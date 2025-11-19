@@ -27,7 +27,7 @@ Example:
 
 1. Clone and change to the Push_swap directory
 ```
-git clone https://github.com/Yuxin29/Push_swap.git
+git clone https://github.com/Yuxin29/Push_swap.git push_swap
 cd push_swap
 ```
 
