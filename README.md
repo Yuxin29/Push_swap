@@ -12,18 +12,16 @@
 - Proper memory management and error handling  
 
 ## Program Rules
-- Input is a list of integers passed as arguments  
+- Input is a list of integers separated by spaces as arguments  
 - Only valid integers are accepted; duplicates cause an error  
 - Operations must be printed in order to sort the stack  
 - The goal is to minimize the number of operations  
 
-## Input Format
-- Integers separated by spaces  
-- Example:  
+Example:  
 ```
 ./push_swap 3 2 5 1 4
+# The program will output a sequence of operations to sort the numbers
 ```
-    The program will output a sequence of operations to sort the numbers
 
 ## Build & Run
 
